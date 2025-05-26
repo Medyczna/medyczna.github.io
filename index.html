@@ -372,7 +372,10 @@ body.dark footer a {
     <p>Witaj! Skoro tu jesteś, wiedz że jest to projekt który zamierzam rozwinąć, również wydać w wersji aplikacji na telefon.</p>
     <p>Na ten moment projekt działa w wersji "beta", postaram się codziennie aktualizować cennik</p>
     <p>Jeżeli podoba Ci się moja praca i chcesz dorzucić swoją cegiełkę – możesz <a href="https://buymeacoffee.com/xa4r4ax" target="_blank" rel="noopener">kupić mi kawę ☕</a>. Dzięki za wsparcie!</p>
+	<p id="visitor-counter">Ogarnęło ceny: 0 osób</p>
+
   </h4>
+
 
   <footer>
     <p style="margin-top: 12px; font-size: 0.85rem;">&copy; 2025 _d0nky. Wszelkie prawa zastrzeżone. Jeżeli znajdziesz jakieś błędy, daj znać proszę -> #Discord: _d0nky</p>
@@ -383,6 +386,19 @@ document.addEventListener('DOMContentLoaded', () => {
 const switcher = document.getElementById('theme-switcher');
 const icon = document.getElementById('theme-icon');
 const body = document.body;
+const counterElement = document.getElementById('visitor-counter');
+
+// Zwiększ licznik tylko raz na sesję
+if (!sessionStorage.getItem('counted')) {
+  let count = parseInt(localStorage.getItem('visitCount') || '0');
+  count++;
+  localStorage.setItem('visitCount', count);
+  sessionStorage.setItem('counted', 'true');
+}
+
+// Wyświetl licznik
+const currentCount = localStorage.getItem('visitCount') || '0';
+counterElement.textContent = `Ogarnęło ceny: ${currentCount} osób`;
 
   
   const miastaMap = {

@@ -1,0 +1,1 @@
+Wyszukiwarka medycznej marihuany, filtrująca najniższe ceny na podstawie danych z gdziepolek.pl.

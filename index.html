@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <title>Wyszukiwarka niższych cen medycznej marihuany.</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+body {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #f9fdfa, #e8f5f2);
+  color: #1b2a33;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: background 0.5s ease, color 0.5s ease;
+}
+
+h1 {
+  font-weight: 600;
+  font-size: 2.8rem;
+  color: #00695c;
+  margin-bottom: 30px;
+  text-align: center;
+  text-shadow: 0 2px 6px rgba(0, 105, 92, 0.2);
+  letter-spacing: 0.03em;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 30px;
+  width: 100%;
+  max-width: 960px;
+}
+
+.filters > div {
+  flex: 1 1 180px;
+  min-width: 150px;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #004d40;
+  user-select: none;
+  letter-spacing: 0.02em;
+  font-size: 1rem;
+}
+
+select {
+  width: 100%;
+  padding: 14px 18px;
+  border-radius: 14px;
+  border: 2px solid #b2dfdb;
+  font-size: 1.05rem;
+  color: #004d40;
+  background-color: #e0f2f1;
+  box-shadow: inset 0 4px 8px rgb(0 0 0 / 0.06);
+  cursor: pointer;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, #00796b 50%),
+    linear-gradient(135deg, #00796b 50%, transparent 50%);
+  background-position:
+    calc(100% - 20px) calc(1em + 3px),
+    calc(100% - 15px) calc(1em + 3px);
+  background-size: 6px 6px;
+  background-repeat: no-repeat;
+  font-weight: 500;
+  box-sizing: border-box;
+}
+
+/* Animacja pulsowania obramowania przy focusie select */
+select:hover, select:focus {
+  border-color: #004d40;
+  background-color: #b2dfdb;
+  box-shadow: 0 0 10px #00796b88;
+  outline: none;
+}
+
+select:focus {
+  animation: pulse-border 1s ease infinite;
+}
+
+@keyframes pulse-border {
+  0%, 100% {
+    border-color: #004d40;
+    box-shadow: 0 0 10px #00796b88;
+  }
+  50% {
+    border-color: #00796b;
+    box-shadow: 0 0 18px #004d4099;
+  }
+}
+
+.apteka {
+  background: #ffffffdd;
+  border-radius: 24px;
+  padding: 26px 32px;
+  margin: 20px 0;
+  max-width: 960px;
+  width: 100%;
+  box-shadow:
+    0 12px 28px rgba(0, 121, 107, 0.15),
+    0 8px 12px rgba(0, 121, 107, 0.1);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+  cursor: default;
+  will-change: transform;
+  overflow: hidden;
+}
+
+/* Animacja pulsowania cienia na hover apteki */
+@keyframes pulse-shadow {
+  0% {
+    box-shadow:
+      0 12px 28px rgba(0, 121, 107, 0.15),
+      0 8px 12px rgba(0, 121, 107, 0.1);
+  }
+  100% {
+    box-shadow:
+      0 25px 45px rgba(0, 121, 107, 0.3),
+      0 12px 16px rgba(0, 121, 107, 0.2);
+  }
+}
+
+.apteka:hover {
+  animation: pulse-shadow 1.5s ease infinite alternate;
+  transform: translateY(-6px) scale(1.02);
+}
+
+.apteka strong {
+  font-size: 1.4rem;
+  color: #004d40;
+  display: block;
+  margin-bottom: 12px;
+  letter-spacing: 0.01em;
+}
+
+.price {
+  font-weight: 700;
+  color: #c62828;
+  font-size: 1.2rem;
+  margin-left: 8px;
+  transition: color 0.3s ease;
+  user-select: text;
+}
+
+.price:hover {
+  color: #8b0000;
+}
+
+.apteka div {
+  margin-top: 6px;
+  color: #004d40;
+  font-weight: 500;
+  font-size: 1rem;
+  user-select: none;
+  letter-spacing: 0.02em;
+}
+
+footer {
+  margin-top: auto;
+  width: 100%;
+  max-width: 960px;
+  padding: 12px 16px; /* zmniejszony padding */
+  background: #004d4088;
+  border-radius: 16px; /* delikatnie mniejsze zaokrąglenie */
+  font-size: 0.9rem; /* mniejsza czcionka */
+  color: #a7d5cc;
+  box-shadow: 0 4px 12px rgba(0, 77, 64, 0.3); /* subtelniejszy cień */
+  line-height: 1.4; /* mniejsze odstępy między liniami */
+  user-select: none;
+  transition: background 0.5s ease, color 0.5s ease;
+  letter-spacing: 0.005em; /* subtelniejsze litery */
+}
+
+footer p {
+  margin: 4px 0;
+}
+
+
+footer a {
+  color: #70cbc5;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+footer a:hover {
+  color: #37a69a;
+  text-decoration: underline;
+}
+
+/* Ciemny motyw */
+body.dark {
+  background: linear-gradient(135deg, #121618, #1a2228);
+  color: #e0f2f1;
+}
+
+body.dark .filters > div label {
+  color: #a0d8cf;
+}
+
+body.dark select {
+  background-color: #1f2a2b;
+  border: 2px solid #4db6ac;
+  color: #a0d8cf;
+  box-shadow: inset 0 4px 8px rgb(0 0 0 / 0.5);
+  background-image:
+    linear-gradient(45deg, transparent 50%, #4db6ac 50%),
+    linear-gradient(135deg, #4db6ac 50%, transparent 50%);
+}
+
+body.dark select:hover, body.dark select:focus {
+  border-color: #70cbc5;
+  background-color: #27675d;
+  box-shadow: 0 0 14px #4db6acbb;
+}
+
+body.dark .apteka {
+  background: #263238ee;
+  color: #cce7e4;
+  box-shadow:
+    0 12px 28px rgba(77, 182, 172, 0.4),
+    0 8px 16px rgba(77, 182, 172, 0.3);
+}
+
+body.dark .apteka:hover {
+  box-shadow:
+    0 25px 50px rgba(77, 182, 172, 0.7),
+    0 12px 20px rgba(77, 182, 172, 0.5);
+}
+
+body.dark .apteka strong {
+  color: #a0d8cf;
+}
+
+body.dark .price {
+  color: #ef9a9a;
+}
+
+body.dark .price:hover {
+  color: #b71c1c;
+}
+
+body.dark .apteka div {
+  color: #aad3ce;
+}
+
+body.dark footer {
+  background: #1b3a33cc;
+  color: #81d4c3;
+  box-shadow: 0 4px 12px rgba(38, 100, 92, 0.6);
+}
+
+
+body.dark footer a {
+  color: #81d4c3;
+}
+
+/* Switcher (przycisk przełączania motywu) */
+#theme-switcher {
+  cursor: pointer;
+  font-size: 28px;
+  user-select: none;
+  position: fixed;
+  top: 25px;
+  right: 25px;
+  background: #00796b;
+  color: white;
+  padding: 12px 22px;
+  border-radius: 32px;
+  box-shadow: 0 0 18px #00796b88;
+  transition: background 0.4s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 4px rgba(0,0,0,0.15);
+}
+
+#theme-switcher:hover {
+  background: #004d40;
+  transform: scale(1.15);
+  box-shadow: 0 0 26px #004d40cc;
+}
+
+#theme-switcher:active {
+  transform: scale(0.95);
+  box-shadow: 0 0 14px #004d40bb;
+}
+
+/* Material Icons - styl ikony w switcherze (jeśli używasz) */
+.material-icons {
+  font-size: 28px;
+  margin-right: 8px;
+  transition: transform 0.3s ease;
+  user-select: none;
+}
+
+#results {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px; /* odstęp między elementami */
+}
+
+.apteka {
+  flex: 1 1 calc(33.333% - 16px); /* 3 na rząd, uwzględniając odstęp */
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+
+
+/* Responsywność: dla bardzo małych ekranów filtry zajmują pełną szerokość */
+@media (max-width: 480px) {
+  .filters > div {
+    flex: 1 1 100%;
+    min-width: unset;
+  }
+}
+</style>
+
+</head>
+<body>
+
+  <button id="theme-switcher" aria-label="Przełącz motyw">
+    <span class="material-symbols-outlined" id="theme-icon">dark_mode</span>
+  </button>
+
+  <h2>Znajdź medyczną marihuanę taniej w swoim mieście!</h2>
+  <blockquote>
+  Ceny pobrano ze strony - gdziepolek.pl<br>
+  Cennik jest z dnia <span id="update-date"></span>
+</blockquote>
+
+  <div class="filters">
+    <div>
+      <select id="city"></select>
+    </div>
+    <div>
+      <select id="producer"></select>
+    </div>
+    <div>
+      <select id="strain"></select>
+    </div>
+    <div>
+      <select id="thc"></select>
+    </div>
+  </div>
+
+  <div id="results"></div>
+  
+  <h4>
+    <p>Witaj! Skoro tu jesteś, wiedz że jest to projekt który zamierzam rozwinąć, również wydać w wersji aplikacji na telefon.</p>
+    <p>Na ten moment projekt działa w wersji "beta", postaram się codziennie aktualizować cennik</p>
+    <p>Jeżeli podoba Ci się moja praca i chcesz dorzucić swoją cegiełkę – możesz <a href="https://buymeacoffee.com/xa4r4ax" target="_blank" rel="noopener">kupić mi kawę ☕</a>. Dzięki za wsparcie!</p>
+  </h4>
+
+  <footer>
+    <p style="margin-top: 12px; font-size: 0.85rem;">&copy; 2025 _d0nky. Wszelkie prawa zastrzeżone. Jeżeli znajdziesz jakieś błędy, daj znać proszę -> #Discord: _d0nky</p>
+
+  </footer>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+const switcher = document.getElementById('theme-switcher');
+const icon = document.getElementById('theme-icon');
+const body = document.body;
+
+  
+  const miastaMap = {
+    "Warszawie": "Warszawa",
+    "Krakowie": "Kraków",
+    "Lodzi": "Łódź",
+    "Wroclawiu": "Wrocław",
+    "Poznaniu": "Poznań",
+    "Gdansku": "Gdańsk",
+    "Gdyni": "Gdynia",
+    "Sopocie": "Sopot",
+    "Szczecinie": "Szczecin",
+    "Bydgoszczy": "Bydgoszcz",
+    "Lublinie": "Lublin",
+    "Bialymstoku": "Białystok",
+    "Katowicach": "Katowice",
+    "Gorzowie-wielkopolskim": "Gorzów Wielkopolski",
+    "Rzeszowie": "Rzeszów",
+    "Olsztynie": "Olsztyn",
+    "Zielonej-gorze": "Zielona Góra",
+    "Toruniu": "Toruń",
+    "Kielcach": "Kielce"
+  };
+
+  function poprawNazweMiasta(wyraz) {
+    for (const [miejsc, mian] of Object.entries(miastaMap)) {
+      const regex = new RegExp(`\\b${miejsc}\\b`, 'gi');
+      if (regex.test(wyraz)) {
+        return wyraz.replace(regex, mian);
+      }
+    }
+    return wyraz;
+  }
+
+  function setTheme(dark) {
+    if (dark) {
+      body.classList.add('dark');
+      switcher.textContent = '☀️';
+      switcher.title = 'Przełącz na jasny motyw';
+    } else {
+      body.classList.remove('dark');
+      switcher.textContent = '🌙';
+      switcher.title = 'Przełącz na ciemny motyw';
+    }
+    localStorage.setItem('theme', dark ? 'dark' : 'light');
+  }
+
+  const savedTheme = localStorage.getItem('theme');
+  setTheme(savedTheme === 'dark');
+
+switcher.addEventListener('click', () => {
+  body.classList.toggle('dark');
+  if(body.classList.contains('dark')){
+    icon.textContent = 'light_mode'; // słońce
+  } else {
+    icon.textContent = 'dark_mode';  // księżyc
+  }
+});
+
+  let apteki = [];
+  const citySelect = document.getElementById('city');
+  const strainSelect = document.getElementById('strain');
+  const producerSelect = document.getElementById('producer');
+  const thcSelect = document.getElementById('thc');
+  const results = document.getElementById('results');
+
+  const cityNormalizeMap = {
+    "Warszawie": "Warszawa",
+    "Krakowie": "Kraków",
+    "Lodzi": "Łódź",
+    "Wroclawiu": "Wrocław",
+    "Poznaniu": "Poznań",
+    "Gdansku": "Gdańsk",
+    "Gdyni": "Gdynia",
+    "Sopocie": "Sopot",
+    "Szczecinie": "Szczecin",
+    "Bydgoszczy": "Bydgoszcz",
+    "Lublinie": "Lublin",
+    "Bialymstoku": "Białystok",
+    "Katowicach": "Katowice",
+    "Gorzowie-wielkopolskim": "Gorzów Wielkopolski",
+    "Rzeszowie": "Rzeszów",
+    "Olsztynie": "Olsztyn",
+    "Zielonej-gorze": "Zielona Góra",
+    "Toruniu": "Toruń",
+    "Kielcach": "Kielce"
+  };
+
+
+  async function loadData() {
+    const res = await fetch('apteki_interaktywne.json');
+    apteki = await res.json();
+    populateCities();
+  }
+
+  function populateCities() {
+    citySelect.innerHTML = '<option value="" disabled selected>Wybierz miasto</option>';
+    const cities = new Set();
+    apteki.forEach(a => cities.add(a.miasto));
+    [...cities].sort().forEach(c => {
+      const displayName = cityNormalizeMap[c] || c;
+      citySelect.innerHTML += `<option value="${c}">${displayName}</option>`;
+    });
+    producerSelect.innerHTML = '<option value="" disabled selected>Wybierz producenta</option>';
+    strainSelect.innerHTML = '<option value="" disabled selected>Wybierz odmianę</option>';
+    thcSelect.innerHTML = '<option value="" disabled selected>Wybierz % THC</option>';
+
+    citySelect.addEventListener('change', onCityChange);
+    producerSelect.addEventListener('change', onProducerChange);
+    strainSelect.addEventListener('change', onStrainChange);
+    thcSelect.addEventListener('change', filterResults);
+  }
+
+  function onCityChange() {
+    const city = citySelect.value;
+    const filteredApteki = apteki.filter(a => a.miasto === city);
+
+    const producers = new Set();
+    filteredApteki.forEach(a => {
+      a.produkty.forEach(p => producers.add(p.producent));
+    });
+
+    producerSelect.innerHTML = '<option value="" disabled selected>Wybierz producenta</option>';
+    [...producers].sort().forEach(p => {
+      producerSelect.innerHTML += `<option value="${p}">${p}</option>`;
+    });
+
+    strainSelect.innerHTML = '<option value="" disabled selected>Wybierz odmianę</option>';
+    thcSelect.innerHTML = '<option value="" disabled selected>Wybierz % THC</option>';
+  }
+
+  function onProducerChange() {
+    const city = citySelect.value;
+    const producer = producerSelect.value;
+
+    const filteredApteki = apteki.filter(a => a.miasto === city);
+    const strains = new Set();
+
+    filteredApteki.forEach(a => {
+      a.produkty.forEach(p => {
+        if (p.producent === producer) {
+          strains.add(p.odmiana);
+        }
+      });
+    });
+
+    strainSelect.innerHTML = '<option value="" disabled selected>Wybierz odmianę</option>';
+    [...strains].sort().forEach(s => {
+      strainSelect.innerHTML += `<option value="${s}">${s}</option>`;
+    });
+
+    thcSelect.innerHTML = '<option value="" disabled selected>Wybierz % THC</option>';
+  }
+
+  function onStrainChange() {
+    const city = citySelect.value;
+    const producer = producerSelect.value;
+    const strain = strainSelect.value;
+
+    if (!city || !producer || !strain) {
+      thcSelect.innerHTML = '<option value="" disabled selected>Wybierz % THC</option>';
+      return;
+    }
+
+    const filteredApteki = apteki.filter(a => a.miasto === city);
+    const thcSet = new Set();
+
+    filteredApteki.forEach(a => {
+      a.produkty.forEach(p => {
+        if (p.producent === producer && p.odmiana === strain) {
+          thcSet.add(p.thc);
+        }
+      });
+    });
+
+    thcSelect.innerHTML = '<option value="" disabled selected>Wybierz % THC</option>';
+    [...thcSet].sort((a, b) => a - b).forEach(t => {
+      thcSelect.innerHTML += `<option value="${t}">${t}%</option>`;
+    });
+
+  }
+
+	  fetch('apteki_interaktywne.json')
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById('update-date').textContent = data[data.length - 1].update;
+      apteki = data;  // zapisz dane do apteki
+      populateCities();
+    })
+    .catch(err => {
+      console.error('Błąd ładowania danych:', err);
+    });
+
+  function filterResults() {
+    const city = citySelect.value;
+    const producer = producerSelect.value;
+    const strain = strainSelect.value;
+    const thc = parseFloat(thcSelect.value);
+
+    if (!city || !producer || !strain || isNaN(thc)) {
+      return;
+    }
+
+    const pasująceWszystkie = [];
+
+    apteki.forEach(apteka => {
+      if (apteka.miasto !== city) return;
+
+      const pasujace = apteka.produkty.filter(p =>
+        p.producent === producer &&
+        p.odmiana === strain &&
+        p.thc === thc
+      );
+
+      if (!pasujace.length) return;
+
+      const inne = apteka.produkty.filter(p =>
+        !(p.producent === producer && p.odmiana === strain && p.thc === thc)
+      );
+
+      pasująceWszystkie.push({ apteka, pasujace, inne });
+    });
+
+    pasująceWszystkie.sort((a, b) => a.pasujace[0].cena - b.pasujace[0].cena);
+    results.innerHTML = '';
+    
+    pasująceWszystkie.forEach(({ apteka, pasujace, inne }) => {
+      const pasujaceHTML = pasujace.map(p => 
+  `<div>
+  <h3 style="display: inline; margin: 0;">${p.odmiana.trim()}</h3>: ${p.data} - 
+  <span class="price">${p.cena.toFixed(2)} zł/g</span>
+</div>
+`).join('');
+
+      const inneHTML = inne.map(p => `<div>${p.odmiana} (${p.producent}): ${p.data} - ${p.cena.toFixed(2)} zł/g</div>`).join('');
+
+      const miastoPoprawione = poprawNazweMiasta(apteka.miasto);
+
+      results.innerHTML += `
+        <div class="apteka">
+          <p><strong>${apteka.adres}<br>${apteka.dostępność}</strong></p>
+          ${pasujaceHTML}<br>
+          ${inneHTML ? inneHTML + '<br>' : ''}
+        </div>
+      `;
+    });
+
+    if (results.innerHTML === '') {
+      results.innerHTML = '<p>Brak wyników.</p>';
+    }
+  }
+
+  loadData();
+});
+</script>
+
+</body>
+</html>

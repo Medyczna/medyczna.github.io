@@ -80,14 +80,6 @@
         "data": "2025-06-30",
         "cena": 32.0,
         "producent": "Four 20 Pharma GmbH"
-      },
-      {
-        "odmiana": "Gorilla Glue",
-        "thc": 22,
-        "cbd": 1,
-        "data": "2025-06-30",
-        "cena": 32.0,
-        "producent": "Four 20 Pharma GmbH"
       }
     ],
     "czas_aktualizacji": "",
@@ -133,14 +125,6 @@
         "cbd": 1,
         "data": "2025-06-30",
         "cena": 36.89,
-        "producent": "Four 20 Pharma GmbH"
-      },
-      {
-        "odmiana": "Gorilla Glue",
-        "thc": 22,
-        "cbd": 1,
-        "data": "2025-06-30",
-        "cena": 36.96,
         "producent": "Four 20 Pharma GmbH"
       }
     ],
@@ -206,14 +190,6 @@
         "cbd": 1,
         "data": "2025-05-31",
         "cena": 46.6,
-        "producent": "Four 20 Pharma GmbH"
-      },
-      {
-        "odmiana": "Gorilla Glue",
-        "thc": 22,
-        "cbd": 1,
-        "data": "2025-05-31",
-        "cena": 62.9,
         "producent": "Four 20 Pharma GmbH"
       }
     ],
@@ -312,14 +288,6 @@
         "producent": "Four 20 Pharma GmbH"
       },
       {
-        "odmiana": "MAC 1",
-        "thc": 22,
-        "cbd": 1,
-        "data": "2025-05-31",
-        "cena": 19.9,
-        "producent": "Four 20 Pharma GmbH"
-      },
-      {
         "odmiana": "Gorilla Glue",
         "thc": 22,
         "cbd": 1,
@@ -344,14 +312,6 @@
         "cbd": 1,
         "data": "2025-08-31",
         "cena": 62.6,
-        "producent": "Four 20 Pharma GmbH"
-      },
-      {
-        "odmiana": "MAC 1",
-        "thc": 22,
-        "cbd": 1,
-        "data": "2025-08-31",
-        "cena": 57.47,
         "producent": "Four 20 Pharma GmbH"
       }
     ],
@@ -481,14 +441,6 @@
         "cbd": 1,
         "data": "2025-06-30",
         "cena": 42.33,
-        "producent": "Four 20 Pharma GmbH"
-      },
-      {
-        "odmiana": "Gorilla Glue",
-        "thc": 22,
-        "cbd": 1,
-        "data": "2025-06-30",
-        "cena": 49.2,
         "producent": "Four 20 Pharma GmbH"
       }
     ],
@@ -696,14 +648,6 @@
         "data": "2025-06-30",
         "cena": 57.2,
         "producent": "Four 20 Pharma GmbH"
-      },
-      {
-        "odmiana": "MAC 1",
-        "thc": 22,
-        "cbd": 1,
-        "data": "2025-06-30",
-        "cena": 56.6,
-        "producent": "Four 20 Pharma GmbH"
       }
     ],
     "czas_aktualizacji": "8 minut temu",
@@ -872,14 +816,6 @@
         "data": "2025-08-31",
         "cena": 56.27,
         "producent": "Four 20 Pharma GmbH"
-      },
-      {
-        "odmiana": "MAC 1",
-        "thc": 22,
-        "cbd": 1,
-        "data": "2025-08-31",
-        "cena": 56.47,
-        "producent": "Four 20 Pharma GmbH"
       }
     ],
     "czas_aktualizacji": "",
@@ -991,14 +927,6 @@
         "cbd": 1,
         "data": "2025-08-31",
         "cena": 59.93,
-        "producent": "Four 20 Pharma GmbH"
-      },
-      {
-        "odmiana": "MAC 1",
-        "thc": 22,
-        "cbd": 1,
-        "data": "2025-08-31",
-        "cena": 59.8,
         "producent": "Four 20 Pharma GmbH"
       }
     ],
@@ -1221,14 +1149,6 @@
         "data": "2025-06-30",
         "cena": 46.6,
         "producent": "Four 20 Pharma GmbH"
-      },
-      {
-        "odmiana": "Gorilla Glue",
-        "thc": 22,
-        "cbd": 1,
-        "data": "2025-06-30",
-        "cena": 47.8,
-        "producent": "Four 20 Pharma GmbH"
       }
     ],
     "czas_aktualizacji": "5 minut temu",
@@ -1363,14 +1283,6 @@
         "cbd": 1,
         "data": "2025-05-31",
         "cena": 20.0,
-        "producent": "Four 20 Pharma GmbH"
-      },
-      {
-        "odmiana": "Gorilla Glue",
-        "thc": 22,
-        "cbd": 1,
-        "data": "2025-05-31",
-        "cena": 33.33,
         "producent": "Four 20 Pharma GmbH"
       }
     ],
@@ -1512,22 +1424,6 @@
         "cbd": 1,
         "data": "2025-05-31",
         "cena": 18.8,
-        "producent": "Four 20 Pharma GmbH"
-      },
-      {
-        "odmiana": "MAC 1",
-        "thc": 22,
-        "cbd": 1,
-        "data": "2025-05-31",
-        "cena": 18.8,
-        "producent": "Four 20 Pharma GmbH"
-      },
-      {
-        "odmiana": "Gorilla Glue",
-        "thc": 22,
-        "cbd": 1,
-        "data": "2025-06-30",
-        "cena": 34.0,
         "producent": "Four 20 Pharma GmbH"
       },
       {
@@ -2350,14 +2246,6 @@
         "cbd": 1,
         "data": "2025-10-31",
         "cena": 42.3,
-        "producent": "Aurora"
-      },
-      {
-        "odmiana": "Delahaze",
-        "thc": 22,
-        "cbd": 1,
-        "data": "2025-10-31",
-        "cena": 40.1,
         "producent": "Aurora"
       }
     ],
@@ -3603,14 +3491,6 @@
         "cbd": 1,
         "data": "2025-10-31",
         "cena": 43.4,
-        "producent": "Aurora"
-      },
-      {
-        "odmiana": "Delahaze",
-        "thc": 22,
-        "cbd": 1,
-        "data": "2025-10-31",
-        "cena": 42.3,
         "producent": "Aurora"
       }
     ],
@@ -5357,14 +5237,6 @@
         "data": "2025-06-30",
         "cena": 35.0,
         "producent": "Aurora"
-      },
-      {
-        "odmiana": "Ghost Train Haze",
-        "thc": 22,
-        "cbd": 1,
-        "data": "2025-06-30",
-        "cena": 30.0,
-        "producent": "Aurora"
       }
     ],
     "czas_aktualizacji": "9 minut temu",
@@ -5383,14 +5255,6 @@
         "cbd": 1,
         "data": "2025-06-30",
         "cena": 40.1,
-        "producent": "Aurora"
-      },
-      {
-        "odmiana": "Ghost Train Haze",
-        "thc": 22,
-        "cbd": 1,
-        "data": "2025-06-30",
-        "cena": 41.2,
         "producent": "Aurora"
       }
     ],
@@ -5793,14 +5657,6 @@
         "data": "2025-08-31",
         "cena": 38.87,
         "producent": "Aurora"
-      },
-      {
-        "odmiana": "Ghost Train Haze",
-        "thc": 22,
-        "cbd": 1,
-        "data": "2025-08-31",
-        "cena": 37.5,
-        "producent": "Aurora"
       }
     ],
     "czas_aktualizacji": "",
@@ -6020,14 +5876,6 @@
         "data": "2025-08-31",
         "cena": 34.9,
         "producent": "Aurora"
-      },
-      {
-        "odmiana": "Ghost Train Haze",
-        "thc": 22,
-        "cbd": 1,
-        "data": "2025-08-31",
-        "cena": 38.0,
-        "producent": "Aurora"
       }
     ],
     "czas_aktualizacji": "",
@@ -6172,14 +6020,6 @@
         "data": "2025-08-31",
         "cena": 39.0,
         "producent": "Aurora"
-      },
-      {
-        "odmiana": "Ghost Train Haze",
-        "thc": 22,
-        "cbd": 1,
-        "data": "2025-08-31",
-        "cena": 36.0,
-        "producent": "Aurora"
       }
     ],
     "czas_aktualizacji": "",
@@ -6247,14 +6087,6 @@
         "data": "2025-08-31",
         "cena": 34.9,
         "producent": "Aurora"
-      },
-      {
-        "odmiana": "Ghost Train Haze",
-        "thc": 22,
-        "cbd": 1,
-        "data": "2025-08-31",
-        "cena": 38.0,
-        "producent": "Aurora"
       }
     ],
     "czas_aktualizacji": "6 minut temu",
@@ -6305,14 +6137,6 @@
     "godziny": "DOZ Apteka Dbam o Zdrowie Vita",
     "dostępność": "ul. Jurajska 5, Modlnica",
     "produkty": [
-      {
-        "odmiana": "Ghost Train Haze",
-        "thc": 22,
-        "cbd": 1,
-        "data": "2025-06-30",
-        "cena": 34.9,
-        "producent": "Aurora"
-      },
       {
         "odmiana": "Ghost Train Haze",
         "thc": 22,
@@ -7956,14 +7780,6 @@
         "data": "2025-08-31",
         "cena": 44.0,
         "producent": "Cosma"
-      },
-      {
-        "odmiana": "Gorilla Girl",
-        "thc": 20,
-        "cbd": null,
-        "data": "2025-08-31",
-        "cena": 40.3,
-        "producent": "Cosma"
       }
     ],
     "czas_aktualizacji": "6 minut temu",
@@ -8777,14 +8593,6 @@
         "data": "2025-08-31",
         "cena": 37.21,
         "producent": "Cosma"
-      },
-      {
-        "odmiana": "Gorilla Girl",
-        "thc": 20,
-        "cbd": null,
-        "data": "2025-08-31",
-        "cena": 34.49,
-        "producent": "Cosma"
       }
     ],
     "czas_aktualizacji": "",
@@ -9168,22 +8976,6 @@
         "data": "2025-08-31",
         "cena": 44.6,
         "producent": "Cosma"
-      },
-      {
-        "odmiana": "Gorilla Girl",
-        "thc": 20,
-        "cbd": null,
-        "data": "2025-08-31",
-        "cena": 45.4,
-        "producent": "Cosma"
-      },
-      {
-        "odmiana": "Gorilla Girl",
-        "thc": 20,
-        "cbd": null,
-        "data": "2025-08-31",
-        "cena": 43.9,
-        "producent": "Cosma"
       }
     ],
     "czas_aktualizacji": "7 minut temu",
@@ -9241,14 +9033,6 @@
         "cbd": null,
         "data": "2025-08-31",
         "cena": 45.39,
-        "producent": "Cosma"
-      },
-      {
-        "odmiana": "Gorilla Girl",
-        "thc": 20,
-        "cbd": null,
-        "data": "2025-08-31",
-        "cena": 46.58,
         "producent": "Cosma"
       }
     ],
@@ -9475,14 +9259,6 @@
         "data": "2025-08-31",
         "cena": 45.39,
         "producent": "Cosma"
-      },
-      {
-        "odmiana": "Gorilla Girl",
-        "thc": 20,
-        "cbd": null,
-        "data": "2025-08-31",
-        "cena": 46.58,
-        "producent": "Cosma"
       }
     ],
     "czas_aktualizacji": "7 minut temu",
@@ -9540,22 +9316,6 @@
         "cbd": null,
         "data": "2025-08-31",
         "cena": 44.6,
-        "producent": "Cosma"
-      },
-      {
-        "odmiana": "Gorilla Girl",
-        "thc": 20,
-        "cbd": null,
-        "data": "2025-08-31",
-        "cena": 45.4,
-        "producent": "Cosma"
-      },
-      {
-        "odmiana": "Gorilla Girl",
-        "thc": 20,
-        "cbd": null,
-        "data": "2025-08-31",
-        "cena": 43.9,
         "producent": "Cosma"
       }
     ],
@@ -9623,14 +9383,6 @@
         "cbd": null,
         "data": "2025-08-31",
         "cena": 45.39,
-        "producent": "Cosma"
-      },
-      {
-        "odmiana": "Gorilla Girl",
-        "thc": 20,
-        "cbd": null,
-        "data": "2025-08-31",
-        "cena": 46.58,
         "producent": "Cosma"
       }
     ],
@@ -9828,14 +9580,6 @@
         "cbd": null,
         "data": "2025-08-31",
         "cena": 40.2,
-        "producent": "Cosma"
-      },
-      {
-        "odmiana": "Gorilla Girl",
-        "thc": 20,
-        "cbd": null,
-        "data": "2025-08-31",
-        "cena": 39.8,
         "producent": "Cosma"
       }
     ],
@@ -10712,14 +10456,6 @@
         "cbd": null,
         "data": "2025-08-31",
         "cena": 58.63,
-        "producent": "Canopy"
-      },
-      {
-        "odmiana": "Jack Haze",
-        "thc": 20,
-        "cbd": null,
-        "data": "2025-08-31",
-        "cena": 58.65,
         "producent": "Canopy"
       }
     ],
@@ -12378,14 +12114,6 @@
         "data": "2025-08-31",
         "cena": 63.85,
         "producent": "Canopy"
-      },
-      {
-        "odmiana": "Jack Haze",
-        "thc": 20,
-        "cbd": null,
-        "data": "2025-08-31",
-        "cena": 65.0,
-        "producent": "Canopy"
       }
     ],
     "czas_aktualizacji": "",
@@ -12423,14 +12151,6 @@
         "cbd": null,
         "data": "2025-08-31",
         "cena": 65.0,
-        "producent": "Canopy"
-      },
-      {
-        "odmiana": "Jack Haze",
-        "thc": 20,
-        "cbd": null,
-        "data": "2025-08-31",
-        "cena": 55.7,
         "producent": "Canopy"
       }
     ],
@@ -17697,22 +17417,6 @@
         "data": "2025-08-31",
         "cena": 44.0,
         "producent": "Cosma"
-      },
-      {
-        "odmiana": "Mac Monkey",
-        "thc": 21,
-        "cbd": null,
-        "data": "2025-08-31",
-        "cena": 50.2,
-        "producent": "Cosma"
-      },
-      {
-        "odmiana": "Mac Monkey",
-        "thc": 21,
-        "cbd": null,
-        "data": "2025-08-31",
-        "cena": 47.7,
-        "producent": "Cosma"
       }
     ],
     "czas_aktualizacji": "6 minut temu",
@@ -18208,14 +17912,6 @@
         "cbd": null,
         "data": "2025-08-31",
         "cena": 410.0,
-        "producent": "Cosma"
-      },
-      {
-        "odmiana": "Mac Monkey",
-        "thc": 21,
-        "cbd": null,
-        "data": "2025-08-31",
-        "cena": 41.0,
         "producent": "Cosma"
       }
     ],
@@ -18989,14 +18685,6 @@
         "data": "2025-08-31",
         "cena": 50.8,
         "producent": "Cosma"
-      },
-      {
-        "odmiana": "Mac Monkey",
-        "thc": 21,
-        "cbd": null,
-        "data": "2025-08-31",
-        "cena": 49.5,
-        "producent": "Cosma"
       }
     ],
     "czas_aktualizacji": "",
@@ -19092,14 +18780,6 @@
         "cbd": null,
         "data": "2025-08-31",
         "cena": 50.4,
-        "producent": "Cosma"
-      },
-      {
-        "odmiana": "Mac Monkey",
-        "thc": 21,
-        "cbd": null,
-        "data": "2025-08-31",
-        "cena": 48.12,
         "producent": "Cosma"
       }
     ],
@@ -23311,14 +22991,6 @@
         "cbd": 1,
         "data": "2025-07-31",
         "cena": 65.98,
-        "producent": "Aurora"
-      },
-      {
-        "odmiana": "Pink Kush",
-        "thc": 20,
-        "cbd": 1,
-        "data": "2025-07-31",
-        "cena": 60.62,
         "producent": "Aurora"
       }
     ],
@@ -30794,14 +30466,6 @@
         "odmiana": "Island Sweet Skunk, Northern Berry",
         "thc": 22,
         "cbd": 1,
-        "data": "2025-07-03",
-        "cena": 31.07,
-        "producent": "S-Lab"
-      },
-      {
-        "odmiana": "Island Sweet Skunk, Northern Berry",
-        "thc": 22,
-        "cbd": 1,
         "data": "2025-09-19",
         "cena": 37.6,
         "producent": "S-Lab"
@@ -32207,14 +31871,6 @@
         "odmiana": "Island Sweet Skunk, Purple Octan, Northern Berry, Sweet Berry",
         "thc": 22,
         "cbd": 1,
-        "data": "2025-09-25",
-        "cena": 41.25,
-        "producent": "S-Lab"
-      },
-      {
-        "odmiana": "Island Sweet Skunk, Purple Octan, Northern Berry, Sweet Berry",
-        "thc": 22,
-        "cbd": 1,
         "data": "2025-09-26",
         "cena": 42.06,
         "producent": "S-Lab"
@@ -32519,14 +32175,6 @@
         "cbd": 1,
         "data": "2025-07-08",
         "cena": 37.33,
-        "producent": "S-Lab"
-      },
-      {
-        "odmiana": "Pink Kush, Headband, Sour Diesel",
-        "thc": 18,
-        "cbd": 1,
-        "data": "2025-07-08",
-        "cena": 37.87,
         "producent": "S-Lab"
       },
       {
@@ -33102,40 +32750,8 @@
         "odmiana": "Pink Kush, Headband, Sour Diesel, Purps",
         "thc": 18,
         "cbd": 1,
-        "data": "2025-07-07",
-        "cena": 36.4,
-        "producent": "S-Lab"
-      },
-      {
-        "odmiana": "Pink Kush, Headband, Sour Diesel, Purps",
-        "thc": 18,
-        "cbd": 1,
         "data": "2025-07-08",
         "cena": 36.73,
-        "producent": "S-Lab"
-      },
-      {
-        "odmiana": "Pink Kush, Headband, Sour Diesel, Purps",
-        "thc": 18,
-        "cbd": 1,
-        "data": "2025-07-08",
-        "cena": 37.67,
-        "producent": "S-Lab"
-      },
-      {
-        "odmiana": "Pink Kush, Headband, Sour Diesel, Purps",
-        "thc": 18,
-        "cbd": 1,
-        "data": "2025-07-08",
-        "cena": 36.4,
-        "producent": "S-Lab"
-      },
-      {
-        "odmiana": "Pink Kush, Headband, Sour Diesel, Purps",
-        "thc": 18,
-        "cbd": 1,
-        "data": "2025-07-08",
-        "cena": 37.27,
         "producent": "S-Lab"
       }
     ],
@@ -33507,14 +33123,6 @@
         "odmiana": "Island Sweet Skunk, Purple Octan, Northern Berry, Sweet Berry",
         "thc": 22,
         "cbd": 1,
-        "data": "2025-09-25",
-        "cena": 41.25,
-        "producent": "S-Lab"
-      },
-      {
-        "odmiana": "Island Sweet Skunk, Purple Octan, Northern Berry, Sweet Berry",
-        "thc": 22,
-        "cbd": 1,
         "data": "2025-09-26",
         "cena": 42.06,
         "producent": "S-Lab"
@@ -33743,40 +33351,8 @@
         "odmiana": "Pink Kush, Headband, Sour Diesel, Purps",
         "thc": 18,
         "cbd": 1,
-        "data": "2025-07-07",
-        "cena": 36.4,
-        "producent": "S-Lab"
-      },
-      {
-        "odmiana": "Pink Kush, Headband, Sour Diesel, Purps",
-        "thc": 18,
-        "cbd": 1,
         "data": "2025-07-08",
         "cena": 36.73,
-        "producent": "S-Lab"
-      },
-      {
-        "odmiana": "Pink Kush, Headband, Sour Diesel, Purps",
-        "thc": 18,
-        "cbd": 1,
-        "data": "2025-07-08",
-        "cena": 37.67,
-        "producent": "S-Lab"
-      },
-      {
-        "odmiana": "Pink Kush, Headband, Sour Diesel, Purps",
-        "thc": 18,
-        "cbd": 1,
-        "data": "2025-07-08",
-        "cena": 36.4,
-        "producent": "S-Lab"
-      },
-      {
-        "odmiana": "Pink Kush, Headband, Sour Diesel, Purps",
-        "thc": 18,
-        "cbd": 1,
-        "data": "2025-07-08",
-        "cena": 37.27,
         "producent": "S-Lab"
       }
     ],
@@ -34342,14 +33918,6 @@
         "cbd": 1,
         "data": "2025-09-25",
         "cena": 42.06,
-        "producent": "S-Lab"
-      },
-      {
-        "odmiana": "Island Sweet Skunk, Purple Octan, Northern Berry, Sweet Berry",
-        "thc": 22,
-        "cbd": 1,
-        "data": "2025-09-25",
-        "cena": 41.25,
         "producent": "S-Lab"
       },
       {
@@ -35430,48 +34998,8 @@
         "odmiana": "Pink Kush, Headband, Sour Diesel, Purps",
         "thc": 18,
         "cbd": 1,
-        "data": "2025-07-07",
-        "cena": 35.8,
-        "producent": "S-Lab"
-      },
-      {
-        "odmiana": "Pink Kush, Headband, Sour Diesel, Purps",
-        "thc": 18,
-        "cbd": 1,
         "data": "2025-07-08",
         "cena": 37.67,
-        "producent": "S-Lab"
-      },
-      {
-        "odmiana": "Pink Kush, Headband, Sour Diesel, Purps",
-        "thc": 18,
-        "cbd": 1,
-        "data": "2025-07-08",
-        "cena": 36.4,
-        "producent": "S-Lab"
-      },
-      {
-        "odmiana": "Pink Kush, Headband, Sour Diesel, Purps",
-        "thc": 18,
-        "cbd": 1,
-        "data": "2025-07-08",
-        "cena": 37.27,
-        "producent": "S-Lab"
-      },
-      {
-        "odmiana": "Pink Kush, Headband, Sour Diesel, Purps",
-        "thc": 18,
-        "cbd": 1,
-        "data": "2025-07-08",
-        "cena": 36.73,
-        "producent": "S-Lab"
-      },
-      {
-        "odmiana": "Pink Kush, Headband, Sour Diesel, Purps",
-        "thc": 18,
-        "cbd": 1,
-        "data": "2025-07-08",
-        "cena": 35.8,
         "producent": "S-Lab"
       }
     ],
@@ -37742,6 +37270,7 @@
     "link_rezerwacji": "https://www.gdziepolek.pl/rezerwacje/dodaj?channel=phone&pharmacyId=6531&pvids=275549&returnUrl=%2Fprodukty%2F117668%2Fcannabis-flos-thc-18-cbd-1-s-lab-marihuana-lecznicza-medyczna%2Fapteki%2Fw-kielcach&v=2"
   },
   {
-    "update": "27.05.2025 22:18"
+    "update": "27.05.2025 22:18",
+    "produkty": []
   }
 ]

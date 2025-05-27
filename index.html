@@ -513,7 +513,46 @@ switcher.addEventListener('click', () => {
 
     strainSelect.innerHTML = '<option value="" disabled selected>Wybierz odmianę</option>';
     thcSelect.innerHTML = '<option value="" disabled selected>Wybierz % THC</option>';
+	
+	showAllFromCity(city);
   }
+
+
+###
+
+function showAllFromCity(city) {
+  const filteredApteki = apteki.filter(a => a.miasto === city);
+  const produktyZMiasta = [];
+
+  filteredApteki.forEach(apteka => {
+    apteka.produkty.forEach(p => {
+      produktyZMiasta.push({
+        apteka,
+        produkt: p
+      });
+    });
+  });
+
+  produktyZMiasta.sort((a, b) => a.produkt.cena - b.produkt.cena);
+
+  results.innerHTML = '';
+  produktyZMiasta.forEach(({ apteka, produkt }) => {
+    results.innerHTML += `
+      <div class="apteka">
+        <p><strong>${apteka.adres}<br>${apteka.dostępność}</strong></p>
+        <div><strong>${produkt.odmiana}</strong> (${produkt.producent}) - ${produkt.thc}% THC<br>
+        ${produkt.data} - <span class="price">${produkt.cena.toFixed(2)} zł/g</span></div>
+      </div>
+    `;
+  });
+
+  if (produktyZMiasta.length === 0) {
+    results.innerHTML = '<p>Brak wyników.</p>';
+  }
+}
+
+
+###
 
   function onProducerChange() {
     const city = citySelect.value;

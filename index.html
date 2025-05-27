@@ -452,30 +452,26 @@ document.addEventListener('DOMContentLoaded', () => {
     return wyraz;
   }
 
-  function setTheme(dark) {
-    if (dark) {
-      body.classList.add('dark');
-      switcher.textContent = '☀️';
-      switcher.title = 'Przełącz na jasny motyw';
-    } else {
-      body.classList.remove('dark');
-      switcher.textContent = '🌙';
-      switcher.title = 'Przełącz na ciemny motyw';
-    }
-    localStorage.setItem('theme', dark ? 'dark' : 'light');
+function setTheme(dark) {
+  if (dark) {
+    body.classList.add('dark');
+    icon.textContent = 'light_mode'; // ☀️ ikona material
+    switcher.title = 'Przełącz na jasny motyw';
+  } else {
+    body.classList.remove('dark');
+    icon.textContent = 'dark_mode'; // 🌙 ikona material
+    switcher.title = 'Przełącz na ciemny motyw';
   }
+  localStorage.setItem('theme', dark ? 'dark' : 'light');
+}
 
   const savedTheme = localStorage.getItem('theme');
   setTheme(savedTheme ? savedTheme === 'dark' : true);
 
-  switcher.addEventListener('click', () => {
-    body.classList.toggle('dark');
-    if(body.classList.contains('dark')){
-      icon.textContent = 'light_mode'; // słońce
-    } else {
-      icon.textContent = 'dark_mode';  // księżyc
-    }
-  });
+switcher.addEventListener('click', () => {
+  const isDark = body.classList.toggle('dark');
+  setTheme(isDark);
+});
 
   let apteki = [];
   const citySelect = document.getElementById('city');

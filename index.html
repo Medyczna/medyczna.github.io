@@ -452,19 +452,18 @@ document.addEventListener('DOMContentLoaded', () => {
     return wyraz;
   }
 
-function setTheme(dark) {
-  if (dark) {
-    body.classList.add('dark');
-    icon.textContent = 'light_mode'; // słońce
-    switcher.title = 'Przełącz na jasny motyw';
-  } else {
-    body.classList.remove('dark');
-    icon.textContent = 'dark_mode'; // księżyc
-    switcher.title = 'Przełącz na ciemny motyw';
+  function setTheme(dark) {
+    if (dark) {
+      body.classList.add('dark');
+      switcher.textContent = '☀️';
+      switcher.title = 'Przełącz na jasny motyw';
+    } else {
+      body.classList.remove('dark');
+      switcher.textContent = '🌙';
+      switcher.title = 'Przełącz na ciemny motyw';
+    }
+    localStorage.setItem('theme', dark ? 'dark' : 'light');
   }
-  localStorage.setItem('theme', dark ? 'dark' : 'light');
-}
-
 
   const savedTheme = localStorage.getItem('theme');
   setTheme(savedTheme !== 'light');

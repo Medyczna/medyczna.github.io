@@ -466,7 +466,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const savedTheme = localStorage.getItem('theme');
-  setTheme(savedTheme !== 'light');
+  setTheme(savedTheme ? savedTheme === 'dark' : true);
 
   switcher.addEventListener('click', () => {
     body.classList.toggle('dark');

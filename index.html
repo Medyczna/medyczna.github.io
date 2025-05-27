@@ -81,7 +81,7 @@ select {
   box-sizing: border-box;
 }
 
-/* Animacja pulsowania obramowania przy focusie select */
+
 select:hover, select:focus {
   border-color: #004d40;
   background-color: #b2dfdb;
@@ -120,7 +120,6 @@ select:focus {
   overflow: hidden;
 }
 
-/* Animacja pulsowania cienia na hover apteki */
 @keyframes pulse-shadow {
   0% {
     box-shadow:
@@ -173,16 +172,16 @@ footer {
   margin-top: auto;
   width: 100%;
   max-width: 960px;
-  padding: 12px 16px; /* zmniejszony padding */
+  padding: 12px 16px;
   background: #004d4088;
-  border-radius: 16px; /* delikatnie mniejsze zaokrąglenie */
-  font-size: 0.9rem; /* mniejsza czcionka */
+  border-radius: 16px;
+  font-size: 0.9rem;
   color: #a7d5cc;
-  box-shadow: 0 4px 12px rgba(0, 77, 64, 0.3); /* subtelniejszy cień */
-  line-height: 1.4; /* mniejsze odstępy między liniami */
+  box-shadow: 0 4px 12px rgba(0, 77, 64, 0.3);
+  line-height: 1.4;
   user-select: none;
   transition: background 0.5s ease, color 0.5s ease;
-  letter-spacing: 0.005em; /* subtelniejsze litery */
+  letter-spacing: 0.005em;
 }
 
 footer p {
@@ -202,7 +201,7 @@ footer a:hover {
   text-decoration: underline;
 }
 
-/* Ciemny motyw */
+
 body.dark {
   background: linear-gradient(135deg, #121618, #1a2228);
   color: #e0f2f1;
@@ -269,7 +268,7 @@ body.dark footer a {
   color: #81d4c3;
 }
 
-/* Switcher (przycisk przełączania motywu) */
+
 #theme-switcher {
   cursor: pointer;
   font-size: 28px;
@@ -304,7 +303,7 @@ body.dark footer a {
   box-shadow: 0 0 14px #004d40bb;
 }
 
-/* Material Icons - styl ikony w switcherze (jeśli używasz) */
+
 .material-icons {
   font-size: 28px;
   margin-right: 8px;
@@ -328,12 +327,22 @@ body.dark footer a {
 
 
 
-/* Responsywność: dla bardzo małych ekranów filtry zajmują pełną szerokość */
+
 @media (max-width: 480px) {
   .filters > div {
     flex: 1 1 100%;
     min-width: unset;
   }
+}
+
+.rezerwuj-link {
+  margin-left: 10px;
+  color: #007bff;
+  font-weight: bold;
+  text-decoration: none;
+}
+.rezerwuj-link:hover {
+  text-decoration: underline;
 }
 </style>
 
@@ -347,8 +356,7 @@ body.dark footer a {
   <h2>Znajdź medyczną marihuanę taniej w swoim mieście!</h2>
   <blockquote>
   Ceny pobrano ze strony - gdziepolek.pl<br>
-  Cennik jest z dnia <span id="update-date"><br>
-  Zalecam po sprawdzeniu cen, zadzwonić do apteki i zapytać o dostępność :)</span>
+  Cennik jest z dnia <span id="update-date"><br></span>
 </blockquote>
 
   <div class="filters">
@@ -381,11 +389,10 @@ body.dark footer a {
   </footer>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-const switcher = document.getElementById('theme-switcher');
-const icon = document.getElementById('theme-icon');
-const body = document.body;
+  const switcher = document.getElementById('theme-switcher');
+  const icon = document.getElementById('theme-icon');
+  const body = document.body;
 
-  
   const miastaMap = {
     "Warszawie": "Warszawa",
     "Krakowie": "Kraków",
@@ -434,14 +441,14 @@ const body = document.body;
   const savedTheme = localStorage.getItem('theme');
   setTheme(savedTheme === 'dark');
 
-switcher.addEventListener('click', () => {
-  body.classList.toggle('dark');
-  if(body.classList.contains('dark')){
-    icon.textContent = 'light_mode'; // słońce
-  } else {
-    icon.textContent = 'dark_mode';  // księżyc
-  }
-});
+  switcher.addEventListener('click', () => {
+    body.classList.toggle('dark');
+    if(body.classList.contains('dark')){
+      icon.textContent = 'light_mode'; // słońce
+    } else {
+      icon.textContent = 'dark_mode';  // księżyc
+    }
+  });
 
   let apteki = [];
   const citySelect = document.getElementById('city');
@@ -472,7 +479,6 @@ switcher.addEventListener('click', () => {
     "Kielcach": "Kielce"
   };
 
-
   async function loadData() {
     const res = await fetch('apteki_interaktywne.json');
     apteki = await res.json();
@@ -491,20 +497,19 @@ switcher.addEventListener('click', () => {
     strainSelect.innerHTML = '<option value="" disabled selected>Wybierz odmianę</option>';
     thcSelect.innerHTML = '<option value="" disabled selected>Wybierz % THC</option>';
 
-citySelect.addEventListener('change', () => {
-  onCityChange();
-  applyFilters();
-});
-producerSelect.addEventListener('change', () => {
-  onProducerChange();
-  applyFilters();
-});
-strainSelect.addEventListener('change', () => {
-  onStrainChange();
-  applyFilters();
-});
-thcSelect.addEventListener('change', applyFilters);
-
+    citySelect.addEventListener('change', () => {
+      onCityChange();
+      applyFilters();
+    });
+    producerSelect.addEventListener('change', () => {
+      onProducerChange();
+      applyFilters();
+    });
+    strainSelect.addEventListener('change', () => {
+      onStrainChange();
+      applyFilters();
+    });
+    thcSelect.addEventListener('change', applyFilters);
   }
 
   function onCityChange() {
@@ -523,46 +528,42 @@ thcSelect.addEventListener('change', applyFilters);
 
     strainSelect.innerHTML = '<option value="" disabled selected>Wybierz odmianę</option>';
     thcSelect.innerHTML = '<option value="" disabled selected>Wybierz % THC</option>';
-	
-	showAllFromCity(city);
+
+    showAllFromCity(city);
   }
 
+  function showAllFromCity(city) {
+    const filteredApteki = apteki.filter(a => a.miasto === city);
+    const produktyZMiasta = [];
 
-
-
-function showAllFromCity(city) {
-  const filteredApteki = apteki.filter(a => a.miasto === city);
-  const produktyZMiasta = [];
-
-  filteredApteki.forEach(apteka => {
-    apteka.produkty.forEach(p => {
-      produktyZMiasta.push({
-        apteka,
-        produkt: p
+    filteredApteki.forEach(apteka => {
+      apteka.produkty.forEach(p => {
+        produktyZMiasta.push({
+          apteka,
+          produkt: p
+        });
       });
     });
-  });
 
-  produktyZMiasta.sort((a, b) => a.produkt.cena - b.produkt.cena);
+    produktyZMiasta.sort((a, b) => a.produkt.cena - b.produkt.cena);
 
-  results.innerHTML = '';
-  produktyZMiasta.forEach(({ apteka, produkt }) => {
-    results.innerHTML += `
-      <div class="apteka">
-        <p><strong>${apteka.adres}<br>${apteka.dostępność}</strong></p>
-        <div><strong>${produkt.odmiana}</strong> (${produkt.producent}) - ${produkt.thc}% THC<br>
-        ${produkt.data} - <span class="price">${produkt.cena.toFixed(2)} zł/g</span></div>
-      </div>
-    `;
-  });
+    results.innerHTML = '';
+    produktyZMiasta.forEach(({ apteka, produkt }) => {
+      results.innerHTML += `
+        <div class="apteka">
+          <p><strong>${apteka.adres}<br>${apteka.dostępność}</strong></p>
+          <div><strong>${produkt.odmiana}</strong> (${produkt.producent}) - ${produkt.thc}% THC<br>
+          ${produkt.data} - <span class="price">${produkt.cena.toFixed(2)} zł/g</span>
+          <a href="${apteka.link_rezerwacji}" target="_blank" class="rezerwuj-link">REZERWUJ</a>
+          </div>
+        </div>
+      `;
+    });
 
-  if (produktyZMiasta.length === 0) {
-    results.innerHTML = '<p>Brak wyników.</p>';
+    if (produktyZMiasta.length === 0) {
+      results.innerHTML = '<p>Brak wyników.</p>';
+    }
   }
-}
-
-
-
 
   function onProducerChange() {
     const city = citySelect.value;
@@ -612,68 +613,66 @@ function showAllFromCity(city) {
     [...thcSet].sort((a, b) => a - b).forEach(t => {
       thcSelect.innerHTML += `<option value="${t}">${t}%</option>`;
     });
-
   }
 
-	  fetch('apteki_interaktywne.json')
+  fetch('apteki_interaktywne.json')
     .then(response => response.json())
     .then(data => {
       document.getElementById('update-date').textContent = data[data.length - 1].update;
-      apteki = data;  // zapisz dane do apteki
+      apteki = data;
       populateCities();
     })
     .catch(err => {
       console.error('Błąd ładowania danych:', err);
     });
 
-function applyFilters() {
-  const city = citySelect.value;
-  const producer = producerSelect.value;
-  const strain = strainSelect.value;
-  const thc = parseFloat(thcSelect.value);
+  function applyFilters() {
+    const city = citySelect.value;
+    const producer = producerSelect.value;
+    const strain = strainSelect.value;
+    const thc = parseFloat(thcSelect.value);
 
-  let pasujące = [];
+    let pasujące = [];
 
-  apteki.forEach(apteka => {
-    if (apteka.miasto !== city) return;
+    apteki.forEach(apteka => {
+      if (apteka.miasto !== city) return;
 
-    const produkty = apteka.produkty.filter(p => {
-      if (producer && p.producent !== producer) return false;
-      if (strain && p.odmiana !== strain) return false;
-      if (!isNaN(thc) && p.thc !== thc) return false;
-      return true;
+      const produkty = apteka.produkty.filter(p => {
+        if (producer && p.producent !== producer) return false;
+        if (strain && p.odmiana !== strain) return false;
+        if (!isNaN(thc) && p.thc !== thc) return false;
+        return true;
+      });
+
+      if (produkty.length > 0) {
+        pasujące.push({ apteka, produkty });
+      }
     });
 
-    if (produkty.length > 0) {
-      pasujące.push({ apteka, produkty });
+    pasujące.sort((a, b) => a.produkty[0].cena - b.produkty[0].cena);
+
+    results.innerHTML = '';
+    pasujące.forEach(({ apteka, produkty }) => {
+      const produktyHTML = produkty.map(p =>
+        `<div>
+          <strong>${p.odmiana}</strong> (${p.producent}) - ${p.thc}% THC<br>
+          ${p.data} - <span class="price">${p.cena.toFixed(2)} zł/g</span> 
+          <a href="${apteka.link_rezerwacji}" target="_blank" class="rezerwuj-link">REZERWUJ</a>
+        </div>`
+      ).join('');
+
+      results.innerHTML += `
+        <div class="apteka">
+          <p><strong>${apteka.adres}<br>${apteka.dostępność}</strong></p>
+          ${produktyHTML}
+        </div>
+      `;
+    });
+
+    if (results.innerHTML === '') {
+      results.innerHTML = '<p>Brak wyników.</p>';
     }
-  });
-
-  // Sortuj po cenie rosnąco
-  pasujące.sort((a, b) => a.produkty[0].cena - b.produkty[0].cena);
-
-  results.innerHTML = '';
-  pasujące.forEach(({ apteka, produkty }) => {
-    const produktyHTML = produkty.map(p =>
-      `<div>
-        <strong>${p.odmiana}</strong> (${p.producent}) - ${p.thc}% THC<br>
-        ${p.data} - <span class="price">${p.cena.toFixed(2)} zł/g</span>
-      </div>`
-    ).join('');
-
-    results.innerHTML += `
-      <div class="apteka">
-        <p><strong>${apteka.adres}<br>${apteka.dostępność}</strong></p>
-        ${produktyHTML}
-      </div>
-    `;
-  });
-
-  if (results.innerHTML === '') {
-    results.innerHTML = '<p>Brak wyników.</p>';
   }
-}
-
 
   loadData();
 });

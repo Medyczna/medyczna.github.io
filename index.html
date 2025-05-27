@@ -491,10 +491,20 @@ switcher.addEventListener('click', () => {
     strainSelect.innerHTML = '<option value="" disabled selected>Wybierz odmianę</option>';
     thcSelect.innerHTML = '<option value="" disabled selected>Wybierz % THC</option>';
 
-    citySelect.addEventListener('change', onCityChange);
-    producerSelect.addEventListener('change', onProducerChange);
-    strainSelect.addEventListener('change', onStrainChange);
-    thcSelect.addEventListener('change', filterResults);
+citySelect.addEventListener('change', () => {
+  onCityChange();
+  applyFilters();
+});
+producerSelect.addEventListener('change', () => {
+  onProducerChange();
+  applyFilters();
+});
+strainSelect.addEventListener('change', () => {
+  onStrainChange();
+  applyFilters();
+});
+thcSelect.addEventListener('change', applyFilters);
+
   }
 
   function onCityChange() {
@@ -616,64 +626,54 @@ function showAllFromCity(city) {
       console.error('Błąd ładowania danych:', err);
     });
 
-  function filterResults() {
-    const city = citySelect.value;
-    const producer = producerSelect.value;
-    const strain = strainSelect.value;
-    const thc = parseFloat(thcSelect.value);
+function applyFilters() {
+  const city = citySelect.value;
+  const producer = producerSelect.value;
+  const strain = strainSelect.value;
+  const thc = parseFloat(thcSelect.value);
 
-    if (!city || !producer || !strain || isNaN(thc)) {
-      return;
-    }
+  let pasujące = [];
 
-    const pasująceWszystkie = [];
+  apteki.forEach(apteka => {
+    if (apteka.miasto !== city) return;
 
-    apteki.forEach(apteka => {
-      if (apteka.miasto !== city) return;
-
-      const pasujace = apteka.produkty.filter(p =>
-        p.producent === producer &&
-        p.odmiana === strain &&
-        p.thc === thc
-      );
-
-      if (!pasujace.length) return;
-
-      const inne = apteka.produkty.filter(p =>
-        !(p.producent === producer && p.odmiana === strain && p.thc === thc)
-      );
-
-      pasująceWszystkie.push({ apteka, pasujace, inne });
+    const produkty = apteka.produkty.filter(p => {
+      if (producer && p.producent !== producer) return false;
+      if (strain && p.odmiana !== strain) return false;
+      if (!isNaN(thc) && p.thc !== thc) return false;
+      return true;
     });
 
-    pasująceWszystkie.sort((a, b) => a.pasujace[0].cena - b.pasujace[0].cena);
-    results.innerHTML = '';
-    
-    pasująceWszystkie.forEach(({ apteka, pasujace, inne }) => {
-      const pasujaceHTML = pasujace.map(p => 
-  `<div>
-  <h3 style="display: inline; margin: 0;">${p.odmiana.trim()}</h3>: ${p.data} - 
-  <span class="price">${p.cena.toFixed(2)} zł/g</span>
-</div>
-`).join('');
-
-      const inneHTML = inne.map(p => `<div>${p.odmiana} (${p.producent}): ${p.data} - ${p.cena.toFixed(2)} zł/g</div>`).join('');
-
-      const miastoPoprawione = poprawNazweMiasta(apteka.miasto);
-
-      results.innerHTML += `
-        <div class="apteka">
-          <p><strong>${apteka.adres}<br>${apteka.dostępność}</strong></p>
-          ${pasujaceHTML}<br>
-          ${inneHTML ? inneHTML + '<br>' : ''}
-        </div>
-      `;
-    });
-
-    if (results.innerHTML === '') {
-      results.innerHTML = '<p>Brak wyników.</p>';
+    if (produkty.length > 0) {
+      pasujące.push({ apteka, produkty });
     }
+  });
+
+  // Sortuj po cenie rosnąco
+  pasujące.sort((a, b) => a.produkty[0].cena - b.produkty[0].cena);
+
+  results.innerHTML = '';
+  pasujące.forEach(({ apteka, produkty }) => {
+    const produktyHTML = produkty.map(p =>
+      `<div>
+        <strong>${p.odmiana}</strong> (${p.producent}) - ${p.thc}% THC<br>
+        ${p.data} - <span class="price">${p.cena.toFixed(2)} zł/g</span>
+      </div>`
+    ).join('');
+
+    results.innerHTML += `
+      <div class="apteka">
+        <p><strong>${apteka.adres}<br>${apteka.dostępność}</strong></p>
+        ${produktyHTML}
+      </div>
+    `;
+  });
+
+  if (results.innerHTML === '') {
+    results.innerHTML = '<p>Brak wyników.</p>';
   }
+}
+
 
   loadData();
 });

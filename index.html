@@ -513,10 +513,11 @@ switcher.addEventListener('click', () => {
     citySelect.innerHTML = '<option value="" disabled selected>Wybierz miasto</option>';
     const cities = new Set();
     apteki.forEach(a => cities.add(a.miasto));
-    [...cities].sort().forEach(c => {
-      const displayName = cityNormalizeMap[c] || c;
-      citySelect.innerHTML += `<option value="${c}">${displayName}</option>`;
-    });
+	[...cities].sort().forEach(c => {
+	if (!c || c.trim() === '' || c === 'undefined') return;
+	const displayName = cityNormalizeMap[c] || c;
+	citySelect.innerHTML += `<option value="${c}">${displayName}</option>`;
+});
     producerSelect.innerHTML = '<option value="" disabled selected>Wybierz producenta</option>';
     strainSelect.innerHTML = '<option value="" disabled selected>Wybierz odmianę</option>';
     thcSelect.innerHTML = '<option value="" disabled selected>Wybierz % THC</option>';

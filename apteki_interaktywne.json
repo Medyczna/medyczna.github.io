@@ -1,9 +1,5 @@
 [
   {
-    "update": "31.05.2025 00:49",
-    "produkty": []
-  },
-  {
     "miasto": "Warszawie",
     "nazwa": "GDZIE PO LEK",
     "adres": "›",
@@ -36384,5 +36380,9 @@
     "produkty": [],
     "czas_aktualizacji": "",
     "link_rezerwacji": "https://www.gdziepolek.pl/rezerwacje/dodaj?channel=phone&pharmacyId=6531&pvids=275549&returnUrl=%2Fprodukty%2F117668%2Fcannabis-flos-thc-18-cbd-1-s-lab-marihuana-lecznicza-medyczna%2Fapteki%2Fw-kielcach&v=2"
-  }
+  },
+  {
+    "update": "31.05.2025 00:49",
+    "produkty": []
+  }  
 ]

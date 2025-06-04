@@ -1,9 +1,5 @@
 [
   {
-    "update": "04.06.2025 21:35",
-    "produkty": []
-  },
-  {
     "miasto": "Warszawie",
     "nazwa": "GDZIE PO LEK",
     "adres": "›",
@@ -36697,5 +36693,8 @@
     "produkty": [],
     "czas_aktualizacji": "7 minut temu",
     "link_rezerwacji": "https://www.gdziepolek.pl/rezerwacje/dodaj?channel=phone&pharmacyId=8346&pvids=282135&returnUrl=%2Fprodukty%2F121591%2Fcannabis-flos-thc-22-cbd-1-s-lab-marihuana-lecznicza-medyczna%2Fapteki%2Fw-sopocie&v=2"
+  },
+    {
+    "update": "04.06.2025 21:35"
   }
 ]

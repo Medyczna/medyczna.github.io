@@ -3,501 +3,90 @@
 <head>
   <meta charset="UTF-8" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css">
   <title>Wyszukiwarka niższych cen medycznej marihuany.</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-
-body {
-  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0;
-  padding: 40px 20px;
-  background: linear-gradient(135deg, #f9fdfa, #e8f5f2);
-  color: #1b2a33;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: background 0.5s ease, color 0.5s ease;
-}
-
-h1 {
-  font-weight: 600;
-  font-size: 2.8rem;
-  color: #00695c;
-  margin-bottom: 30px;
-  text-align: center;
-  text-shadow: 0 2px 6px rgba(0, 105, 92, 0.2);
-  letter-spacing: 0.03em;
-}
-
-.filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-  margin-bottom: 30px;
-  width: 100%;
-  max-width: 960px;
-}
-
-.filters > div {
-  flex: 1 1 180px;
-  min-width: 150px;
-}
-
-label {
-  display: block;
-  font-weight: 600;
-  margin-bottom: 8px;
-  color: #004d40;
-  user-select: none;
-  letter-spacing: 0.02em;
-  font-size: 1rem;
-}
-
-select {
-  width: 100%;
-  padding: 14px 18px;
-  border-radius: 14px;
-  border: 2px solid #b2dfdb;
-  font-size: 1.05rem;
-  color: #004d40;
-  background-color: #e0f2f1;
-  box-shadow: inset 0 4px 8px rgb(0 0 0 / 0.06);
-  cursor: pointer;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background-image:
-    linear-gradient(45deg, transparent 50%, #00796b 50%),
-    linear-gradient(135deg, #00796b 50%, transparent 50%);
-  background-position:
-    calc(100% - 20px) calc(1em + 3px),
-    calc(100% - 15px) calc(1em + 3px);
-  background-size: 6px 6px;
-  background-repeat: no-repeat;
-  font-weight: 500;
-  box-sizing: border-box;
-}
-
-
-select:hover, select:focus {
-  border-color: #004d40;
-  background-color: #b2dfdb;
-  box-shadow: 0 0 10px #00796b88;
-  outline: none;
-}
-
-select:focus {
-  animation: pulse-border 1s ease infinite;
-}
-
-@keyframes pulse-border {
-  0%, 100% {
-    border-color: #004d40;
-    box-shadow: 0 0 10px #00796b88;
-  }
-  50% {
-    border-color: #00796b;
-    box-shadow: 0 0 18px #004d4099;
-  }
-}
-
-.apteka {
-  background: #ffffffdd;
-  border-radius: 24px;
-  padding: 26px 32px;
-  margin: 20px 0;
-  max-width: 960px;
-  width: 100%;
-  box-shadow:
-    0 12px 28px rgba(0, 121, 107, 0.15),
-    0 8px 12px rgba(0, 121, 107, 0.1);
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
-  cursor: default;
-  will-change: transform;
-  overflow: hidden;
-}
-
-@keyframes pulse-shadow {
-  0% {
-    box-shadow:
-      0 12px 28px rgba(0, 121, 107, 0.15),
-      0 8px 12px rgba(0, 121, 107, 0.1);
-  }
-  100% {
-    box-shadow:
-      0 25px 45px rgba(0, 121, 107, 0.3),
-      0 12px 16px rgba(0, 121, 107, 0.2);
-  }
-}
-
-.apteka:hover {
-  animation: pulse-shadow 1.5s ease infinite alternate;
-  transform: translateY(-6px) scale(1.02);
-}
-
-.apteka strong {
-  font-size: 1.4rem;
-  color: #004d40;
-  display: block;
-  margin-bottom: 12px;
-  letter-spacing: 0.01em;
-}
-
-.price {
-  font-weight: 700;
-  color: #c62828;
-  font-size: 1.2rem;
-  margin-left: 8px;
-  transition: color 0.3s ease;
-  user-select: text;
-}
-
-.price:hover {
-  color: #8b0000;
-}
-
-.apteka div {
-  margin-top: 6px;
-  color: #004d40;
-  font-weight: 500;
-  font-size: 1rem;
-  user-select: none;
-  letter-spacing: 0.02em;
-}
-
-footer {
-  margin-top: auto;
-  width: 100%;
-  max-width: 960px;
-  padding: 12px 16px;
-  background: #004d4088;
-  border-radius: 16px;
-  font-size: 0.9rem;
-  color: #a7d5cc;
-  box-shadow: 0 4px 12px rgba(0, 77, 64, 0.3);
-  line-height: 1.4;
-  user-select: none;
-  transition: background 0.5s ease, color 0.5s ease;
-  letter-spacing: 0.005em;
-}
-
-footer p {
-  margin: 4px 0;
-}
-
-
-footer a {
-  color: #70cbc5;
-  font-weight: 700;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-footer a:hover {
-  color: #37a69a;
-  text-decoration: underline;
-}
-
-
-body.dark {
-  background: linear-gradient(135deg, #121618, #1a2228);
-  color: #e0f2f1;
-}
-
-body.dark .filters > div label {
-  color: #a0d8cf;
-}
-
-body.dark select {
-  background-color: #1f2a2b;
-  border: 2px solid #4db6ac;
-  color: #a0d8cf;
-  box-shadow: inset 0 4px 8px rgb(0 0 0 / 0.5);
-  background-image:
-    linear-gradient(45deg, transparent 50%, #4db6ac 50%),
-    linear-gradient(135deg, #4db6ac 50%, transparent 50%);
-}
-
-body.dark select:hover, body.dark select:focus {
-  border-color: #70cbc5;
-  background-color: #27675d;
-  box-shadow: 0 0 14px #4db6acbb;
-}
-
-body.dark .apteka {
-  background: #263238ee;
-  color: #cce7e4;
-  box-shadow:
-    0 12px 28px rgba(77, 182, 172, 0.4),
-    0 8px 16px rgba(77, 182, 172, 0.3);
-}
-
-body.dark .apteka:hover {
-  box-shadow:
-    0 25px 50px rgba(77, 182, 172, 0.7),
-    0 12px 20px rgba(77, 182, 172, 0.5);
-}
-
-body.dark .apteka strong {
-  color: #a0d8cf;
-}
-
-body.dark .price {
-  color: #ef9a9a;
-}
-
-body.dark .price:hover {
-  color: #b71c1c;
-}
-
-body.dark .apteka div {
-  color: #aad3ce;
-}
-
-body.dark footer {
-  background: #1b3a33cc;
-  color: #81d4c3;
-  box-shadow: 0 4px 12px rgba(38, 100, 92, 0.6);
-}
-
-
-body.dark footer a {
-  color: #81d4c3;
-}
-
-
-#theme-switcher {
-  cursor: pointer;
-  font-size: 28px;
-  user-select: none;
-  position: fixed;
-  top: 25px;
-  right: 25px;
-  background: #00796b;
-  color: white;
-  padding: 12px 22px;
-  border-radius: 32px;
-  box-shadow: 0 0 18px #00796b88;
-  transition: background 0.4s ease, transform 0.3s ease, box-shadow 0.3s ease;
-  z-index: 1100;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  will-change: transform;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  text-shadow: 0 0 4px rgba(0,0,0,0.15);
-}
-
-#theme-switcher:hover {
-  background: #004d40;
-  transform: scale(1.15);
-  box-shadow: 0 0 26px #004d40cc;
-}
-
-#theme-switcher:active {
-  transform: scale(0.95);
-  box-shadow: 0 0 14px #004d40bb;
-}
-
-
-.material-icons {
-  font-size: 28px;
-  margin-right: 8px;
-  transition: transform 0.3s ease;
-  user-select: none;
-}
-
-#results {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px; /* odstęp między elementami */
-}
-
-.apteka {
-  flex: 1 1 calc(33.333% - 16px); /* 3 na rząd, uwzględniając odstęp */
-  box-sizing: border-box;
-  border: 1px solid #ccc;
-  padding: 10px;
-  border-radius: 6px;
-}
-
-
-
-
-@media (max-width: 480px) {
-  .filters > div {
-    flex: 1 1 100%;
-    min-width: unset;
-  }
-}
-
-.rezerwuj-link {
-  margin-left: 10px;
-  color: #007bff;
-  font-weight: bold;
-  text-decoration: none;
-}
-.rezerwuj-link:hover {
-  text-decoration: underline;
-}
-
-.changelog {
-  font-size: 0.8rem;
-  max-width: 300px;
-  border: 1px solid #ccc;
-  padding: 10px;
-  border-radius: 5px;
-  font-family: Arial, sans-serif;
-}
-.changelog summary {
-  cursor: pointer;
-  font-weight: bold;
-  color: #333;
-}
-.changelog p {
-  margin: 5px 0;
-}
-
-	.info {
-	  font-size: 0.8rem;
-	  max-width: 300px;
-	  border: 1px solid #ccc;
-	  padding: 10px;
-	  border-radius: 5px;
-	  font-family: Arial, sans-serif;
-	}
-	.info summary {
-	  cursor: pointer;
-	  font-weight: bold;
-	  color: #333;
-	}
-	.info p {
-	  margin: 5px 0;
-	}	
-</style>
-
 </head>
 <body>
+  <div class="background-animation"></div>
+  <div class="floating-particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
 
-  <button id="theme-switcher" aria-label="Przełącz motyw">
-    <span class="material-symbols-outlined" id="theme-icon">dark_mode</span>
-  </button>
+  <div class="main-container">
+    <h2 class="main-title">Znajdź medyczną marihuanę taniej w swoim mieście!</h2>
+    <blockquote class="info-block">
+      Ceny pobrano ze strony - gdziepolek.pl<br>
+      Cennik jest z dnia <span id="update-date"><br></span>
+    </blockquote>
 
-  <h2>Znajdź medyczną marihuanę taniej w swoim mieście!</h2>
-  <blockquote>
-  Ceny pobrano ze strony - gdziepolek.pl<br>
-  Cennik jest z dnia <span id="update-date"><br></span>
-</blockquote>
+    <div class="filters">
+      <div class="filter-group">
+        <select id="city"></select>
+      </div>
+      <div class="filter-group">
+        <select id="producer"></select>
+      </div>
+      <div class="filter-group">
+        <select id="strain"></select>
+      </div>
+      <div class="filter-group">
+        <select id="thc"></select>
+      </div>
+    </div>
 
-  <div class="filters">
-    <div>
-      <select id="city"></select>
-    </div>
-    <div>
-      <select id="producer"></select>
-    </div>
-    <div>
-      <select id="strain"></select>
-    </div>
-    <div>
-      <select id="thc"></select>
+    <div id="results" class="results-container"></div>
+
+    <div class="info-section">
+      <h4>
+        <p>Witaj! Skoro tu jesteś, wiedz że jest to projekt który zamierzam rozwinąć, również wydać w wersji aplikacji na telefon.</p>
+        <p>Na ten moment projekt działa w wersji "beta", postaram się codziennie aktualizować cennik</p>
+        <p>Jeśli doceniasz to, co robię i chcesz mnie wesprzeć, będzie mi bardzo miło! 
+        <a href="https://buycoffee.to/donky" target="_blank"><img src="https://buycoffee.to/img/share-button-dark.png" style="width: 117px; height: 30px" alt="Postaw mi kawę na buycoffee.to"></a>
+      </h4>
+      
+		<details class="changelog">
+		  <summary>Changelog (kliknij, by rozwinąć)</summary>
+		  <p><strong>04.06.2025</strong> | Dodano:</p>
+		  <ul>
+			<li>Zmienione UI.</li><br>
+			<li>Status oficjalnego projektu:</li>
+			<li>Nacisnij GIF aby powiększyć.</li>
+			<li>
+			  <a href="1update.gif" target="_blank">
+				<img src="1update.gif" width="280" height="190" alt="">
+			  </a>
+			</li>
+		  </ul><br><br>
+		  <p><strong>27.05.2025</strong> | Dodano:</p>
+		  <ul>
+			<li>Przeniesienie do rezerwacji/apteki.</li>
+			<li>420 Pharm.</li>
+		  </ul><br><br>
+		  <p><strong>26.05.2025</strong> | Strona jest publiczna, jest w wersji testowej.</p>
+		</details>
+
+      <details class="info">
+        <summary>Status i plany (kliknij, by rozwinąć)</summary>
+        <p>Wkrótce strona zostanie przeniesiona do zautomatyzowanego hostingu, co znacznie ułatwi jej obsługę.</p>
+        <p>Planuję również dodać możliwość sortowania według województw oraz rozszerzyć listę dostępnych miast.</p>
+        <p>Obecnie napotykam pewne trudności z serwisem GdziePoLek – uciążliwa CAPTCHA pojawia się przy każdym odświeżeniu strony.</p>
+        <p>Pracuję nad rozwiązaniem tego problemu, proszę o odrobinę cierpliwości.</p>
+      </details>
     </div>
   </div>
 
-  <div id="results"></div>
-
-  
-  <h4>
-    <p>Witaj! Skoro tu jesteś, wiedz że jest to projekt który zamierzam rozwinąć, również wydać w wersji aplikacji na telefon.</p>
-    <p>Na ten moment projekt działa w wersji "beta", postaram się codziennie aktualizować cennik</p>
-<p>Jeśli doceniasz to, co robię i chcesz mnie wesprzeć, będzie mi bardzo miło! 
-<a href="https://buycoffee.to/donky" target="_blank"><img src="https://buycoffee.to/img/share-button-dark.png" style="width: 117px; height: 30px" alt="Postaw mi kawę na buycoffee.to"></a>
-  </h4>
-  
-<details class="changelog">
-  <summary>Changelog (kliknij, by rozwinąć)</summary>
-  <p><strong>27.05.2025</strong> | Dodano:</p>
-  <ul>
-    <li>Przeniesienie do rezerwacji/apteki.</li>
-    <li>420 Pharm.</li>
-  </ul>
-  <p><strong>26.05.2025</strong> | Strona jest publiczna, jest w wersji testowej.</p>
-</details>  
-
-<details class="info">
-  <summary>Status i plany (kliknij, by rozwinąć)</summary>
-  <p>Wkrótce strona zostanie przeniesiona do zautomatyzowanego hostingu, co znacznie ułatwi jej obsługę.</p>
-  <p>Planuję również dodać możliwość sortowania według województw oraz rozszerzyć listę dostępnych miast.</p>
-  <p>Obecnie napotykam pewne trudności z serwisem GdziePoLek – uciążliwa CAPTCHA pojawia się przy każdym odświeżeniu strony.</p>
-  <p>Pracuję nad rozwiązaniem tego problemu, proszę o odrobinę cierpliwości.</p>
-</details>
-
   <footer>
-    <p style="margin-top: 12px; font-size: 0.85rem;">&copy; 2025 _d0nky. Wszelkie prawa zastrzeżone. Jeżeli znajdziesz jakieś błędy, daj znać proszę -> #Discord: _d0nky <div class="external-counter"><img src="https://visit-counter.vercel.app/counter.png?page=https%3A%2F%2Fmedyczna.github.io%2F&s=16&c=5fb431&bg=00000000&no=4&ff=digi&tb=&ta=" alt="visits"></p>
+    <p>&copy; 2025 _d0nky. Wszelkie prawa zastrzeżone. Jeżeli znajdziesz jakieś błędy, daj znać proszę -> #Discord: _d0nky</p>
+    <div class="external-counter"><img src="https://visit-counter.vercel.app/counter.png?page=https%3A%2F%2Fmedyczna.github.io%2F&s=16&c=5fb431&bg=00000000&no=4&ff=digi&tb=&ta=" alt="visits"></div>
   </footer>
+
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  const switcher = document.getElementById('theme-switcher');
-  const icon = document.getElementById('theme-icon');
-  const body = document.body;
-
-  const miastaMap = {
-    "Warszawie": "Warszawa",
-    "Krakowie": "Kraków",
-    "Lodzi": "Łódź",
-    "Wroclawiu": "Wrocław",
-    "Poznaniu": "Poznań",
-    "Gdansku": "Gdańsk",
-    "Gdyni": "Gdynia",
-    "Sopocie": "Sopot",
-    "Szczecinie": "Szczecin",
-    "Bydgoszczy": "Bydgoszcz",
-    "Lublinie": "Lublin",
-    "Bialymstoku": "Białystok",
-    "Katowicach": "Katowice",
-    "Gorzowie-wielkopolskim": "Gorzów Wielkopolski",
-    "Rzeszowie": "Rzeszów",
-    "Olsztynie": "Olsztyn",
-    "Zielonej-gorze": "Zielona Góra",
-    "Toruniu": "Toruń",
-    "Kielcach": "Kielce"
-  };
-
-  function poprawNazweMiasta(wyraz) {
-    for (const [miejsc, mian] of Object.entries(miastaMap)) {
-      const regex = new RegExp(`\\b${miejsc}\\b`, 'gi');
-      if (regex.test(wyraz)) {
-        return wyraz.replace(regex, mian);
-      }
-    }
-    return wyraz;
-  }
-
-function setTheme(dark) {
-  if (dark) {
-    body.classList.add('dark');
-    icon.textContent = 'light_mode'; // ☀️ ikona material
-    switcher.title = 'Przełącz na jasny motyw';
-  } else {
-    body.classList.remove('dark');
-    icon.textContent = 'dark_mode'; // 🌙 ikona material
-    switcher.title = 'Przełącz na ciemny motyw';
-  }
-  localStorage.setItem('theme', dark ? 'dark' : 'light');
-}
-
-  const savedTheme = localStorage.getItem('theme');
-  setTheme(savedTheme ? savedTheme === 'dark' : true);
-
-switcher.addEventListener('click', () => {
-  const isDark = body.classList.toggle('dark');
-  setTheme(isDark);
-});
-
   let apteki = [];
   const citySelect = document.getElementById('city');
   const strainSelect = document.getElementById('strain');
@@ -601,9 +190,13 @@ switcher.addEventListener('click', () => {
       results.innerHTML += `
         <div class="apteka">
           <p><strong>${apteka.adres}<br>${apteka.dostępność}</strong></p>
-          <div><strong>${produkt.odmiana}</strong> (${produkt.producent}) - ${produkt.thc}% THC<br>
-          ${produkt.data} - <span class="price">${produkt.cena.toFixed(2)} zł/g</span>
-          <a href="${apteka.link_rezerwacji}" target="_blank" class="rezerwuj-link">REZERWUJ</a>
+          <div>
+            <span class="strain-name"><strong>${produkt.odmiana}</strong></span> 
+            <span class="producer-name">(${produkt.producent})</span> - 
+            <span class="thc-content">${produkt.thc}% THC</span><br>
+            <span class="date-text">${produkt.data}</span> - 
+            <span class="price">${produkt.cena.toFixed(2)} zł/g</span>
+            <a href="${apteka.link_rezerwacji}" target="_blank" class="rezerwuj-link">REZERWUJ</a>
           </div>
         </div>
       `;
@@ -704,8 +297,11 @@ switcher.addEventListener('click', () => {
     pasujące.forEach(({ apteka, produkty }) => {
       const produktyHTML = produkty.map(p =>
         `<div>
-          <strong>${p.odmiana}</strong> (${p.producent}) - ${p.thc}% THC<br>
-          ${p.data} - <span class="price">${p.cena.toFixed(2)} zł/g</span> 
+          <span class="strain-name"><strong>${p.odmiana}</strong></span> 
+          <span class="producer-name">(${p.producent})</span> - 
+          <span class="thc-content">${p.thc}% THC</span><br>
+          <span class="date-text">${p.data}</span> - 
+          <span class="price">${p.cena.toFixed(2)} zł/g</span> 
           <a href="${apteka.link_rezerwacji}" target="_blank" class="rezerwuj-link">REZERWUJ</a>
         </div>`
       ).join('');

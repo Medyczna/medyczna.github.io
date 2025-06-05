@@ -2,90 +2,761 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8" />
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css">
-  <title>Wyszukiwarka niższych cen medycznej marihuany.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <title>Wyszukiwarka niższych cen medycznej marihuany</title>
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0f172a, #1e293b, #334155);
+      background-size: 400% 400%;
+      animation: gradientShift 20s ease infinite;
+      color: #f8fafc;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+
+    .startup-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 23, 42, 0.95);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+      backdrop-filter: blur(12px);
+    }
+
+    .modal-content {
+      background: linear-gradient(145deg, #1e293b, #334155);
+      padding: 2rem;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+      border: 1px solid #10b981;
+      position: relative;
+      max-width: 95%;
+      max-height: 95%;
+      animation: modalSlideIn 0.6s ease-out;
+    }
+
+    @keyframes modalSlideIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.9) translateY(-20px);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .modal-gif {
+      max-width: 100%;
+      max-height: 70vh;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      box-shadow: 0 8px 25px rgba(16, 185, 129, 0.2);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .modal-gif:hover {
+      transform: scale(1.02);
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: #ef4444;
+      color: white;
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      opacity: 0;
+      animation: fadeInDelay 0.5s ease 5s forwards;
+    }
+
+    @keyframes fadeInDelay {
+      to { opacity: 1; }
+    }
+
+    .close-btn:hover {
+      background: #dc2626;
+      transform: scale(1.1);
+    }
+
+    .modal-text {
+      color: #10b981;
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+
+    .countdown {
+      color: #10b981;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .visit-counter {
+      background: linear-gradient(145deg, #1e293b, #334155);
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      border: 1px solid #10b981;
+      color: #10b981;
+      font-weight: 600;
+      font-size: 14px;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
+    }
+
+
+    .title {
+      font-weight: 700;
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, #10b981, #34d399);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.025em;
+    }
+
+
+    .info-block {
+      background: linear-gradient(145deg, #1e293b, #334155);
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+      border: 1px solid #475569;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .info-block strong {
+      color: #10b981;
+    }
+
+
+    .filters {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background: linear-gradient(145deg, #1e293b, #334155);
+      border-radius: 12px;
+      border: 1px solid #475569;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .filter-group {
+      position: relative;
+    }
+
+    .filter-label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      color: #94a3b8;
+      margin-bottom: 0.5rem;
+    }
+
+    select {
+      width: 100%;
+      padding: 0.875rem 1rem;
+      border-radius: 8px;
+      border: 1px solid #475569;
+      font-size: 15px;
+      color: #f8fafc;
+      background: #0f172a;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      appearance: none;
+      font-weight: 500;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    select:hover {
+      border-color: #10b981;
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+    }
+
+    select:focus {
+      border-color: #10b981;
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+      outline: none;
+    }
+
+
+    .filter-group::after {
+      content: '▼';
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #94a3b8;
+      pointer-events: none;
+      font-size: 12px;
+      margin-top: 12px;
+    }
+
+
+    select option {
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 0.5rem;
+    }
+
+    select option:hover {
+      background: #1e293b;
+    }
+
+
+    .results-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 1.5rem;
+    }
+
+
+    .apteka {
+      background: linear-gradient(145deg, #1e293b, #334155);
+      border-radius: 12px;
+      padding: 1.5rem;
+      border: 1px solid #475569;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .apteka:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      border-color: #10b981;
+    }
+
+    .apteka-header {
+      font-size: 16px;
+      font-weight: 600;
+      color: #f8fafc;
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+
+    .product-item {
+      margin: 1rem 0;
+      padding: 1rem;
+      background: #0f172a;
+      border-radius: 8px;
+      border-left: 3px solid #10b981;
+    }
+
+    .strain-name {
+      color: #fbbf24;
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .producer-name {
+      color: #f97316;
+      font-weight: 500;
+      margin-left: 0.5rem;
+    }
+
+    .thc-content {
+      color: #10b981;
+      font-weight: 500;
+      margin-left: 0.5rem;
+    }
+
+    .date-text {
+      color: #94a3b8;
+      font-size: 14px;
+    }
+
+    .price {
+      font-weight: 700;
+      color: #ef4444;
+      font-size: 18px;
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      background: rgba(239, 68, 68, 0.1);
+      border-radius: 6px;
+      margin: 0.5rem 0;
+      border: 1px solid rgba(239, 68, 68, 0.2);
+    }
+
+    .rezerwuj-link {
+      display: inline-block;
+      margin-top: 0.75rem;
+      color: white;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #10b981, #059669);
+      transition: all 0.3s ease;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .rezerwuj-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+      background: linear-gradient(135deg, #059669, #047857);
+    }
+
+
+    .info-section {
+      margin-top: 3rem;
+    }
+
+    .info-section h4 {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #f8fafc;
+      margin-bottom: 1.5rem;
+    }
+
+    .changelog, .info {
+      font-size: 14px;
+      border: 1px solid #475569;
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin: 1.5rem 0;
+      background: linear-gradient(145deg, #1e293b, #334155);
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .changelog:hover, .info:hover {
+      border-color: #10b981;
+      transform: translateY(-2px);
+    }
+
+    .changelog summary, .info summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: #10b981;
+      padding: 0.5rem;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      font-size: 16px;
+    }
+
+    .changelog summary:hover, .info summary:hover {
+      background: rgba(16, 185, 129, 0.1);
+    }
+
+
+    footer {
+      margin: 3rem 0 2rem;
+      padding: 1.5rem;
+      background: linear-gradient(145deg, #1e293b, #334155);
+      border-radius: 12px;
+      font-size: 14px;
+      color: #94a3b8;
+      text-align: center;
+      border: 1px solid #475569;
+    }
+
+    footer a {
+      color: #10b981;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    footer a:hover {
+      color: #34d399;
+    }
+
+
+    .fullscreen-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 23, 42, 0.95);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 20000;
+      backdrop-filter: blur(12px);
+    }
+
+    .fullscreen-gif {
+      max-width: 95%;
+      max-height: 95%;
+      border-radius: 12px;
+      box-shadow: 0 25px 50px rgba(16, 185, 129, 0.3);
+    }
+
+    .fullscreen-close {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      background: #ef4444;
+      color: white;
+      border: none;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 20px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .fullscreen-close:hover {
+      background: #dc2626;
+      transform: scale(1.1);
+    }
+
+
+    .main-content {
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .main-content.visible {
+      opacity: 1;
+    }
+
+    /* Responsywność */
+    @media (max-width: 768px) {
+      .title {
+        font-size: 2rem;
+      }
+      
+      .header {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .filters {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+      }
+      
+      .results-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .container {
+        padding: 1rem;
+      }
+
+      .modal-text {
+        font-size: 16px;
+      }
+
+      .modal-gif {
+        max-height: 60vh;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .title {
+        font-size: 1.75rem;
+      }
+      
+      .modal-content {
+        padding: 1rem;
+      }
+      
+      select {
+        padding: 0.75rem;
+        font-size: 14px;
+      }
+      
+      .apteka {
+        padding: 1rem;
+      }
+
+      .modal-text {
+        font-size: 14px;
+      }
+    }
+  </style>
 </head>
 <body>
-  <div class="background-animation"></div>
-  <div class="floating-particles">
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
+
+  <div class="startup-modal" id="startupModal">
+    <div class="modal-content">
+      <button class="close-btn" id="closeBtn" onclick="closeModal()">&times;</button>
+      <div class="modal-text">Obejrzyj proszę, jak wygląda główny projekt, zaczynając od panelu farmaceuty aż po wyszukiwanie :).</div>
+      <img src="updater1.gif" alt="Loading..." class="modal-gif" id="modalGif" onclick="openFullscreen()">
+      <div class="countdown" id="countdown">Możesz zamknąć za 5 sekund...</div>
+    </div>
   </div>
 
-  <div class="main-container">
-    <h2 class="main-title">Znajdź medyczną marihuanę taniej w swoim mieście!</h2>
-    <blockquote class="info-block">
-      Ceny pobrano ze strony - gdziepolek.pl<br>
-      Cennik jest z dnia <span id="update-date"><br></span>
-    </blockquote>
 
-    <div class="filters">
-      <div class="filter-group">
-        <select id="city"></select>
-      </div>
-      <div class="filter-group">
-        <select id="producer"></select>
-      </div>
-      <div class="filter-group">
-        <select id="strain"></select>
-      </div>
-      <div class="filter-group">
-        <select id="thc"></select>
-      </div>
-    </div>
+  <div class="fullscreen-modal" id="fullscreenModal">
+    <button class="fullscreen-close" onclick="closeFullscreen()">&times;</button>
+    <img src="updater1.gif" alt="Loading..." class="fullscreen-gif">
+  </div>
 
-    <div id="results" class="results-container"></div>
 
-    <div class="info-section">
-      <h4>
-        <p>Witaj! Skoro tu jesteś, wiedz że jest to projekt który zamierzam rozwinąć, również wydać w wersji aplikacji na telefon.</p>
-        <p>Na ten moment projekt działa w wersji "beta", postaram się codziennie aktualizować cennik</p>
-        <p>Jeśli doceniasz to, co robię i chcesz mnie wesprzeć, będzie mi bardzo miło! 
-        <a href="https://buycoffee.to/donky" target="_blank"><img src="https://buycoffee.to/img/share-button-dark.png" style="width: 117px; height: 30px" alt="Postaw mi kawę na buycoffee.to"></a>
-      </h4>
+  <div class="main-content" id="mainContent">
+    <div class="container">
+
+      <div class="header">
+        <div class="visit-counter">
+          Odwiedziny: <span id="visitCount">0</span>
+        </div>
+      </div>
+
+      <h1 class="title">Znajdź medyczną marihuanę taniej w swoim mieście</h1>
       
-		<details class="changelog">
-		  <summary>Changelog (kliknij, by rozwinąć)</summary>
-		  <p><strong>04.06.2025</strong> | Dodano:</p>
-		  <ul>
-			<li>Zmienione UI.</li><br>
-			<li>Status oficjalnego projektu:</li>
-			<li>Nacisnij GIF aby powiększyć.</li>
-			<li>
-			  <a href="updater1.gif" target="_blank">
-				<img src="updater1.gif" width="280" height="190" alt="">
-			  </a>
-			</li>
-		  </ul><br><br>
-		  <p><strong>27.05.2025</strong> | Dodano:</p>
-		  <ul>
-			<li>Przeniesienie do rezerwacji/apteki.</li>
-			<li>420 Pharm.</li>
-		  </ul><br><br>
-		  <p><strong>26.05.2025</strong> | Strona jest publiczna, jest w wersji testowej.</p>
-		</details>
+      <div class="info-block">
+        <strong>Ceny pobrano ze strony - gdziepolek.pl</strong><br>
+        Cennik jest z dnia <span id="update-date"></span>
+      </div>
 
-      <details class="info">
-        <summary>Status i plany (kliknij, by rozwinąć)</summary>
-        <p>Wkrótce strona zostanie przeniesiona do zautomatyzowanego hostingu, co znacznie ułatwi jej obsługę.</p>
-        <p>Planuję również dodać możliwość sortowania według województw oraz rozszerzyć listę dostępnych miast.</p>
-        <p>Obecnie napotykam pewne trudności z serwisem GdziePoLek – uciążliwa CAPTCHA pojawia się przy każdym odświeżeniu strony.</p>
-        <p>Pracuję nad rozwiązaniem tego problemu, proszę o odrobinę cierpliwości.</p>
-      </details>
+      <div class="filters">
+        <div class="filter-group">
+          <label class="filter-label">Miasto</label>
+          <select id="city">
+            <option value="" disabled selected>Wybierz miasto</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label class="filter-label">Producent</label>
+          <select id="producer">
+            <option value="" disabled selected>Wybierz producenta</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label class="filter-label">Odmiana</label>
+          <select id="strain">
+            <option value="" disabled selected>Wybierz odmianę</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label class="filter-label">% THC</label>
+          <select id="thc">
+            <option value="" disabled selected>Wybierz % THC</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="results" class="results-container"></div>
+
+      <div class="info-section">
+        <h4>
+          <p>Witaj! Skoro tu jesteś, wiedz że jest to projekt który zamierzam rozwinąć, również wydać w wersji aplikacji na telefon.</p>
+          <p>Na ten moment projekt działa w wersji "beta", postaram się codziennie aktualizować cennik</p>
+          <p>Jeśli doceniasz to, co robię i chcesz mnie wesprzeć, będzie mi bardzo miło! 
+          <a href="https://buycoffee.to/donky" target="_blank"><img src="https://buycoffee.to/img/share-button-dark.png" style="width: 117px; height: 30px" alt="Postaw mi kawę na buycoffee.to"></a>
+        </h4>
+        
+        <details class="changelog">
+          <summary>Changelog (kliknij, by rozwinąć)</summary>
+          <p><strong>04.06.2025</strong> | Dodano:</p>
+          <ul>
+            <li>Zmienione UI.</li><br>
+            <li>Status oficjalnego projektu:</li>
+            <li>Nacisnij GIF aby powiększyć.</li>
+            <li>
+              <a href="updater1.gif" target="_blank">
+                <img src="updater1.gif" width="280" height="190" alt="">
+              </a>
+            </li>
+          </ul><br><br>
+          <p><strong>27.05.2025</strong> | Dodano:</p>
+          <ul>
+            <li>Przeniesienie do rezerwacji/apteki.</li>
+            <li>420 Pharm.</li>
+          </ul><br><br>
+          <p><strong>26.05.2025</strong> | Strona jest publiczna, jest w wersji testowej.</p>
+        </details>
+
+        <details class="info">
+          <summary>Status i plany (kliknij, by rozwinąć)</summary>
+          <p>Wkrótce strona zostanie przeniesiona do zautomatyzowanego hostingu, co znacznie ułatwi jej obsługę.</p>
+          <p>Planuję również dodać możliwość sortowania według województw oraz rozszerzyć listę dostępnych miast.</p>
+          <p>Obecnie napotykam pewne trudności z serwisem GdziePoLek – uciążliwa CAPTCHA pojawia się przy każdym odświeżeniu strony.</p>
+          <p>Pracuję nad rozwiązaniem tego problemu, proszę o odrobinę cierpliwości.</p>
+        </details>
+      </div>
+
+      <footer>
+        <p>&copy; 2025 _d0nky. Wszelkie prawa zastrzeżone. Jeżeli znajdziesz jakieś błędy, daj znać proszę -> #Discord: _d0nky</p>
+      </footer>
     </div>
   </div>
-
-  <footer>
-    <p>&copy; 2025 _d0nky. Wszelkie prawa zastrzeżone. Jeżeli znajdziesz jakieś błędy, daj znać proszę -> #Discord: _d0nky</p>
-    <div class="external-counter"><img src="https://visit-counter.vercel.app/counter.png?page=https%3A%2F%2Fmedyczna.github.io%2F&s=16&c=5fb431&bg=00000000&no=4&ff=digi&tb=&ta=" alt="visits"></div>
-  </footer>
 
 <script>
+
+function initVisitCounter() {
+  const visitKey = 'medyczna_visits';
+  const sessionKey = 'medyczna_session';
+  
+
+  if (!sessionStorage.getItem(sessionKey)) {
+    let visits = localStorage.getItem(visitKey);
+    if (!visits) {
+      visits = 0; //
+    } else {
+      visits = parseInt(visits) + 1;
+    }
+    localStorage.setItem(visitKey, visits);
+    sessionStorage.setItem(sessionKey, 'true');
+  }
+  
+  const currentVisits = localStorage.getItem(visitKey) || 0;
+  document.getElementById('visitCount').textContent = currentVisits;
+}
+
+
+function shouldShowModal() {
+  const lastShown = localStorage.getItem('modal_last_shown');
+  const now = Date.now();
+  
+  if (!lastShown) {
+    return true;
+  }
+  
+  const timeDiff = now - parseInt(lastShown);
+  const oneMinute = 60 * 1000;
+  
+  return timeDiff >= oneMinute;
+}
+
+function setModalShown() {
+  localStorage.setItem('modal_last_shown', Date.now().toString());
+}
+
+
+let countdown = 5;
+const countdownElement = document.getElementById('countdown');
+const closeBtn = document.getElementById('closeBtn');
+
+function updateCountdown() {
+  if (countdown > 0) {
+    countdownElement.textContent = `Możesz zamknąć za ${countdown} sekund...`;
+    countdown--;
+    setTimeout(updateCountdown, 1000);
+  } else {
+    countdownElement.textContent = 'Kliknij X aby zamknąć';
+    closeBtn.style.opacity = '1';
+  }
+}
+
+function closeModal() {
+  const modal = document.getElementById('startupModal');
+  const mainContent = document.getElementById('mainContent');
+  
+  modal.style.opacity = '0';
+  modal.style.transform = 'scale(0.8)';
+  
+  setTimeout(() => {
+    modal.style.display = 'none';
+    mainContent.classList.add('visible');
+  }, 300);
+  
+  setModalShown();
+}
+
+
+function openFullscreen() {
+  document.getElementById('fullscreenModal').style.display = 'flex';
+}
+
+function closeFullscreen() {
+  document.getElementById('fullscreenModal').style.display = 'none';
+}
+
+
+function setGifSize() {
+  const gif = document.getElementById('modalGif');
+  const img = new Image();
+  img.onload = function() {
+    const maxWidth = window.innerWidth * 0.9;
+    const maxHeight = window.innerHeight * 0.7;
+    
+    let width = this.naturalWidth;
+    let height = this.naturalHeight;
+    
+    // Skaluj jeśli za duże
+    if (width > maxWidth) {
+      height = (height * maxWidth) / width;
+      width = maxWidth;
+    }
+    
+    if (height > maxHeight) {
+      width = (width * maxHeight) / height;
+      height = maxHeight;
+    }
+    
+    gif.style.width = width + 'px';
+    gif.style.height = height + 'px';
+  };
+  img.src = 'updater1.gif';
+}
+
+
+window.addEventListener('load', () => {
+
+  initVisitCounter();
+  
+  if (shouldShowModal()) {
+    document.getElementById('startupModal').style.display = 'flex';
+    updateCountdown();
+    setGifSize();
+  } else {
+
+    document.getElementById('startupModal').style.display = 'none';
+    document.getElementById('mainContent').classList.add('visible');
+  }
+});
+
+
 document.addEventListener('DOMContentLoaded', () => {
   let apteki = [];
   const citySelect = document.getElementById('city');
@@ -116,21 +787,17 @@ document.addEventListener('DOMContentLoaded', () => {
     "Kielcach": "Kielce"
   };
 
-  async function loadData() {
-    const res = await fetch('apteki_interaktywne.json');
-    apteki = await res.json();
-    populateCities();
-  }
-
   function populateCities() {
     citySelect.innerHTML = '<option value="" disabled selected>Wybierz miasto</option>';
     const cities = new Set();
     apteki.forEach(a => cities.add(a.miasto));
-	[...cities].sort().forEach(c => {
-	if (!c || c.trim() === '' || c === 'undefined') return;
-	const displayName = cityNormalizeMap[c] || c;
-	citySelect.innerHTML += `<option value="${c}">${displayName}</option>`;
-});
+    
+    [...cities].sort().forEach(c => {
+      if (!c || c.trim() === '' || c === 'undefined') return;
+      const displayName = cityNormalizeMap[c] || c;
+      citySelect.innerHTML += `<option value="${c}">${displayName}</option>`;
+    });
+    
     producerSelect.innerHTML = '<option value="" disabled selected>Wybierz producenta</option>';
     strainSelect.innerHTML = '<option value="" disabled selected>Wybierz odmianę</option>';
     thcSelect.innerHTML = '<option value="" disabled selected>Wybierz % THC</option>';
@@ -189,21 +856,23 @@ document.addEventListener('DOMContentLoaded', () => {
     produktyZMiasta.forEach(({ apteka, produkt }) => {
       results.innerHTML += `
         <div class="apteka">
-          <p><strong>${apteka.adres}<br>${apteka.dostępność}</strong></p>
-          <div>
-            <span class="strain-name"><strong>${produkt.odmiana}</strong></span> 
-            <span class="producer-name">(${produkt.producent})</span> - 
-            <span class="thc-content">${produkt.thc}% THC</span><br>
-            <span class="date-text">${produkt.data}</span> - 
-            <span class="price">${produkt.cena.toFixed(2)} zł/g</span>
-            <a href="${apteka.link_rezerwacji}" target="_blank" class="rezerwuj-link">REZERWUJ</a>
+          <div class="apteka-header">${apteka.adres}<br>${apteka.dostępność}</div>
+          <div class="product-item">
+            <div>
+              <span class="strain-name">${produkt.odmiana}</span> 
+              <span class="producer-name">(${produkt.producent})</span><br>
+              <span class="thc-content">${produkt.thc}% THC</span><br>
+              <span class="date-text">${produkt.data}</span><br>
+              <div class="price">${produkt.cena.toFixed(2)} zł/g</div>
+            </div>
+            <a href="${apteka.link_rezerwacji}" target="_blank" class="rezerwuj-link">Rezerwuj</a>
           </div>
         </div>
       `;
     });
 
     if (produktyZMiasta.length === 0) {
-      results.innerHTML = '<p>Brak wyników.</p>';
+      results.innerHTML = '<p style="color: #f97316; text-align: center;">Brak wyników dla wybranego miasta.</p>';
     }
   }
 
@@ -257,17 +926,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  fetch('apteki_interaktywne.json')
-    .then(response => response.json())
-    .then(data => {
-      document.getElementById('update-date').textContent = data[data.length - 1].update;
-      apteki = data;
-      populateCities();
-    })
-    .catch(err => {
-      console.error('Błąd ładowania danych:', err);
-    });
-
   function applyFilters() {
     const city = citySelect.value;
     const producer = producerSelect.value;
@@ -291,35 +949,87 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    pasujące.sort((a, b) => a.produkty[0].cena - b.produkty[0].cena);
+
+    pasujące.sort((a, b) => {
+      const minPriceA = Math.min(...a.produkty.map(p => p.cena));
+      const minPriceB = Math.min(...b.produkty.map(p => p.cena));
+      return minPriceA - minPriceB;
+    });
 
     results.innerHTML = '';
     pasujące.forEach(({ apteka, produkty }) => {
+
+      produkty.sort((a, b) => a.cena - b.cena);
+      
       const produktyHTML = produkty.map(p =>
-        `<div>
-          <span class="strain-name"><strong>${p.odmiana}</strong></span> 
-          <span class="producer-name">(${p.producent})</span> - 
-          <span class="thc-content">${p.thc}% THC</span><br>
-          <span class="date-text">${p.data}</span> - 
-          <span class="price">${p.cena.toFixed(2)} zł/g</span> 
-          <a href="${apteka.link_rezerwacji}" target="_blank" class="rezerwuj-link">REZERWUJ</a>
+        `<div class="product-item">
+          <div>
+            <span class="strain-name">${p.odmiana}</span> 
+            <span class="producer-name">(${p.producent})</span><br>
+            <span class="thc-content">${p.thc}% THC</span><br>
+            <span class="date-text">${p.data}</span><br>
+            <div class="price">${p.cena.toFixed(2)} zł/g</div>
+          </div>
+          <a href="${apteka.link_rezerwacji}" target="_blank" class="rezerwuj-link">Rezerwuj</a>
         </div>`
       ).join('');
 
       results.innerHTML += `
         <div class="apteka">
-          <p><strong>${apteka.adres}<br>${apteka.dostępność}</strong></p>
+          <div class="apteka-header">${apteka.adres}<br>${apteka.dostępność}</div>
           ${produktyHTML}
         </div>
       `;
     });
 
     if (results.innerHTML === '') {
-      results.innerHTML = '<p>Brak wyników.</p>';
+      results.innerHTML = '<p style="color: #f97316; text-align: center;">Brak wyników dla wybranych filtrów.</p>';
     }
   }
 
-  loadData();
+
+  fetch('./apteki_interaktywne.json')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      if (data && data.length > 0) {
+
+        const lastItem = data[data.length - 1];
+        if (lastItem && lastItem.update) {
+          document.getElementById('update-date').textContent = lastItem.update;
+        }
+        apteki = data;
+        populateCities();
+      } else {
+        throw new Error('Puste dane JSON');
+      }
+    })
+    .catch(err => {
+      console.error('Błąd ładowania danych:', err);
+      results.innerHTML = '<p style="color: #ef4444; text-align: center;">Błąd ładowania danych. Sprawdź czy plik apteki_interaktywne.json istnieje w tym samym folderze.</p>';
+      
+
+      fetch('apteki_interaktywne.json')
+        .then(response => response.json())
+        .then(data => {
+          if (data && data.length > 0) {
+            const lastItem = data[data.length - 1];
+            if (lastItem && lastItem.update) {
+              document.getElementById('update-date').textContent = lastItem.update;
+            }
+            apteki = data;
+            populateCities();
+            results.innerHTML = '';
+          }
+        })
+        .catch(err2 => {
+          console.error('Drugi błąd ładowania danych:', err2);
+        });
+    });
 });
 </script>
 

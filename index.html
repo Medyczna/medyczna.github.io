@@ -636,20 +636,20 @@
 function initVisitCounter() {
   const visitKey = 'medyczna_visits';
   const sessionKey = 'medyczna_session';
-  
 
   if (!sessionStorage.getItem(sessionKey)) {
     let visits = localStorage.getItem(visitKey);
     if (!visits) {
-      visits = 0; //
+      visits = 0;
     } else {
-      visits = parseInt(visits) + 1;
+      visits = parseInt(visits);
     }
-    localStorage.setItem(visitKey, visits);
+    visits += 1;
+    localStorage.setItem(visitKey, visits.toString());
     sessionStorage.setItem(sessionKey, 'true');
   }
-  
-  const currentVisits = localStorage.getItem(visitKey) || 0;
+
+  const currentVisits = parseInt(localStorage.getItem(visitKey)) || 0;
   document.getElementById('visitCount').textContent = currentVisits;
 }
 

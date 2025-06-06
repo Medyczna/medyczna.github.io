@@ -663,7 +663,7 @@ function shouldShowModal() {
   }
   
   const timeDiff = now - parseInt(lastShown);
-  const oneMinute = 60 * 1000;
+  const oneMinute = 24 * 60 * 60 * 1000;
   
   return timeDiff >= oneMinute;
 }
@@ -723,7 +723,6 @@ function setGifSize() {
     let width = this.naturalWidth;
     let height = this.naturalHeight;
     
-    // Skaluj jeśli za duże
     if (width > maxWidth) {
       height = (height * maxWidth) / width;
       width = maxWidth;

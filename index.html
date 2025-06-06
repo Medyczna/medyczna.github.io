@@ -2,10 +2,11 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <title>Wyszukiwarka niższych cen medycznej marihuany</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
+
     * {
       margin: 0;
       padding: 0;
@@ -27,6 +28,7 @@
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
+
 
     .startup-modal {
       position: fixed;
@@ -121,11 +123,13 @@
       font-weight: 500;
     }
 
+
     .container {
       max-width: 1200px;
       margin: 0 auto;
       padding: 2rem 1rem;
     }
+
 
     .header {
       display: flex;
@@ -147,6 +151,7 @@
       box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
     }
 
+
     .title {
       font-weight: 700;
       font-size: 2.5rem;
@@ -158,6 +163,7 @@
       margin-bottom: 1.5rem;
       letter-spacing: -0.025em;
     }
+
 
     .info-block {
       background: linear-gradient(145deg, #1e293b, #334155);
@@ -172,6 +178,7 @@
     .info-block strong {
       color: #10b981;
     }
+
 
     .filters {
       display: grid;
@@ -223,6 +230,7 @@
       outline: none;
     }
 
+
     .filter-group::after {
       content: '▼';
       position: absolute;
@@ -235,6 +243,7 @@
       margin-top: 12px;
     }
 
+
     select option {
       background: #0f172a;
       color: #f8fafc;
@@ -245,11 +254,13 @@
       background: #1e293b;
     }
 
+
     .results-container {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
       gap: 1.5rem;
     }
+
 
     .apteka {
       background: linear-gradient(145deg, #1e293b, #334155);
@@ -338,6 +349,7 @@
       background: linear-gradient(135deg, #059669, #047857);
     }
 
+
     .info-section {
       margin-top: 3rem;
     }
@@ -379,6 +391,7 @@
       background: rgba(16, 185, 129, 0.1);
     }
 
+
     footer {
       margin: 3rem 0 2rem;
       padding: 1.5rem;
@@ -400,6 +413,7 @@
     footer a:hover {
       color: #34d399;
     }
+
 
     .fullscreen-modal {
       position: fixed;
@@ -442,6 +456,7 @@
       background: #dc2626;
       transform: scale(1.1);
     }
+
 
     .main-content {
       opacity: 0;
@@ -510,19 +525,24 @@
   </style>
 </head>
 <body>
+
   <div class="startup-modal" id="startupModal">
     <div class="modal-content">
       <button class="close-btn" id="closeBtn" onclick="closeModal()">×</button>
       <div class="modal-text">Obejrzyj proszę, jak wygląda główny projekt, zaczynając od panelu farmaceuty aż po wyszukiwanie :).</div>
-      <img src="updater1.gif" alt="Loading..." class="modal-gif" id="modalGif" onclick="openFullscreen()" />
+      <img src="updater1.gif" alt="Loading..." class="modal-gif" id="modalGif" onclick="openFullscreen()">
       <div class="countdown" id="countdown">Możesz zamknąć za 5 sekund...</div>
     </div>
   </div>
+
+
   <div class="fullscreen-modal" id="fullscreenModal">
     <button class="fullscreen-close" onclick="closeFullscreen()">×</button>
-    <img src="updater1.gif" alt="Loading..." class="fullscreen-gif" />
+    <img src="updater1.gif" alt="Loading..." class="fullscreen-gif">
   </div>
-  <div class="main-content" id="mainContent" style="opacity: 0; transition: opacity 0.5s ease;">
+
+
+  <div class="main-content" id="mainContent">
     <div class="container">
 
       <div class="header">
@@ -530,7 +550,7 @@
           Odwiedziny: <span id="visitCount">0</span>
         </div>
       </div>
-      
+
       <h1 class="title">Znajdź medyczną marihuanę taniej w swoim mieście</h1>
       
       <div class="info-block">
@@ -612,188 +632,228 @@
   </div>
 
 <script>
-  function updateCountdown() {
-    if (typeof countdown === 'undefined') var countdown = 5;
-    const countdownElement = document.getElementById('countdown');
-    const closeBtn = document.getElementById('closeBtn');
-    if (countdown > 0) {
-      countdownElement.textContent = `Możesz zamknąć za ${countdown} sekund...`;
-      countdown--;
-      setTimeout(updateCountdown, 1000);
+
+function initVisitCounter() {
+  const visitKey = 'medyczna_visits';
+  const sessionKey = 'medyczna_session';
+
+  if (!sessionStorage.getItem(sessionKey)) {
+    let visits = localStorage.getItem(visitKey);
+    if (!visits) {
+      visits = 0;
     } else {
-      countdownElement.textContent = 'Kliknij X aby zamknąć';
-      closeBtn.style.opacity = '1';
+      visits = parseInt(visits);
     }
+    visits += 1;
+    localStorage.setItem(visitKey, visits.toString());
+    sessionStorage.setItem(sessionKey, 'true');
   }
 
-  function closeModal() {
-    const modal = document.getElementById('startupModal');
-    const mainContent = document.getElementById('mainContent');
-
-    modal.style.opacity = '0';
-    modal.style.transform = 'scale(0.8)';
-
-    setTimeout(() => {
-      modal.style.display = 'none';
-      mainContent.classList.add('visible');
-      mainContent.style.opacity = '1';
-    }, 300);
+  const currentVisits = parseInt(localStorage.getItem(visitKey)) || 0;
+  document.getElementById('visitCount').textContent = currentVisits;
+}
 
 
-    localStorage.setItem('modal_last_shown', Date.now().toString());
+function shouldShowModal() {
+  const lastShown = localStorage.getItem('modal_last_shown');
+  const now = Date.now();
+  
+  if (!lastShown) {
+    return true;
   }
+  
+  const timeDiff = now - parseInt(lastShown);
+  const oneMinute = 24 * 60 * 60 * 1000;
+  
+  return timeDiff >= oneMinute;
+}
 
-  function openFullscreen() {
-    document.getElementById('fullscreenModal').style.display = 'flex';
+function setModalShown() {
+  localStorage.setItem('modal_last_shown', Date.now().toString());
+}
+
+
+let countdown = 5;
+const countdownElement = document.getElementById('countdown');
+const closeBtn = document.getElementById('closeBtn');
+
+function updateCountdown() {
+  if (countdown > 0) {
+    countdownElement.textContent = `Możesz zamknąć za ${countdown} sekund...`;
+    countdown--;
+    setTimeout(updateCountdown, 1000);
+  } else {
+    countdownElement.textContent = 'Kliknij X aby zamknąć';
+    closeBtn.style.opacity = '1';
   }
+}
 
-  function closeFullscreen() {
-    document.getElementById('fullscreenModal').style.display = 'none';
-  }
+function closeModal() {
+  const modal = document.getElementById('startupModal');
+  const mainContent = document.getElementById('mainContent');
+  
+  modal.style.opacity = '0';
+  modal.style.transform = 'scale(0.8)';
+  
+  setTimeout(() => {
+    modal.style.display = 'none';
+    mainContent.classList.add('visible');
+  }, 300);
+  
+  setModalShown();
+}
 
-  function setGifSize() {
-    const gif = document.getElementById('modalGif');
-    const img = new Image();
-    img.onload = function() {
-      const maxWidth = window.innerWidth * 0.9;
-      const maxHeight = window.innerHeight * 0.7;
-      let width = this.naturalWidth;
-      let height = this.naturalHeight;
-      if (width > maxWidth) {
-        height = (height * maxWidth) / width;
-        width = maxWidth;
-      }
-      if (height > maxHeight) {
-        width = (width * maxHeight) / height;
-        height = maxHeight;
-      }
-      gif.style.width = width + 'px';
-      gif.style.height = height + 'px';
-    };
-    img.src = 'updater1.gif';
-  }
 
-  window.addEventListener('load', () => {
+function openFullscreen() {
+  document.getElementById('fullscreenModal').style.display = 'flex';
+}
 
-    if (!localStorage.getItem('modal_last_shown') || Date.now() - parseInt(localStorage.getItem('modal_last_shown')) > 60 * 1000) {
-      document.getElementById('startupModal').style.display = 'flex';
-      updateCountdown();
-      setGifSize();
-    } else {
-      document.getElementById('startupModal').style.display = 'none';
-      document.getElementById('mainContent').classList.add('visible');
+function closeFullscreen() {
+  document.getElementById('fullscreenModal').style.display = 'none';
+}
+
+
+function setGifSize() {
+  const gif = document.getElementById('modalGif');
+  const img = new Image();
+  img.onload = function() {
+    const maxWidth = window.innerWidth * 0.9;
+    const maxHeight = window.innerHeight * 0.7;
+    
+    let width = this.naturalWidth;
+    let height = this.naturalHeight;
+    
+    if (width > maxWidth) {
+      height = (height * maxWidth) / width;
+      width = maxWidth;
     }
-  });
-
-  document.addEventListener('DOMContentLoaded', () => {
-
-    let apteki = [];
-    const citySelect = document.getElementById('city');
-    const strainSelect = document.getElementById('strain');
-    const producerSelect = document.getElementById('producer');
-    const thcSelect = document.getElementById('thc');
-    const results = document.getElementById('results');
-
-    fetch('./apteki_interaktywne.json')
-      .then(response => {
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        return response.json();
-      })
-      .then(data => {
-        if (data && data.length > 0) {
-          const lastItem = data[data.length - 1];
-          if (lastItem && lastItem.update) {
-            document.getElementById('update-date').textContent = lastItem.update;
-          }
-          apteki = data;
-          populateCities();
-        } else {
-          throw new Error('Puste dane JSON');
-        }
-      })
-      .catch(err => {
-        console.error('Błąd ładowania danych:', err);
-        results.innerHTML = '<p style="color: #ef4444; text-align: center;">Błąd ładowania danych. Sprawdź czy plik apteki_interaktywne.json istnieje w tym samym folderze.</p>';
-
-      });
-
-    function populateCities() {
-
-      const citySelect = document.getElementById('city');
-      const producerSelect = document.getElementById('producer');
-      const strainSelect = document.getElementById('strain');
-      const thcSelect = document.getElementById('thc');
-
-      citySelect.innerHTML = '<option value="" disabled selected>Wybierz miasto</option>';
-      const cities = new Set();
-      apteki.forEach(a => cities.add(a.miasto));
-      const cityNormalizeMap = {
-        "Warszawie": "Warszawa",
-        "Krakowie": "Kraków",
-        "Lodzi": "Łódź",
-        "Wroclawiu": "Wrocław",
-        "Poznaniu": "Poznań",
-        "Gdansku": "Gdańsk",
-        "Gdyni": "Gdynia",
-        "Sopocie": "Sopot",
-        "Szczecinie": "Szczecin",
-        "Bydgoszczy": "Bydgoszcz",
-        "Lublinie": "Lublin",
-        "Bialymstoku": "Białystok",
-        "Katowicach": "Katowice",
-        "Gorzowie-wielkopolskim": "Gorzów Wielkopolski",
-        "Rzeszowie": "Rzeszów",
-        "Olsztynie": "Olsztyn",
-        "Zielonej-gorze": "Zielona Góra",
-        "Toruniu": "Toruń",
-        "Kielcach": "Kielce"
-      };
-      [...cities].sort().forEach(c => {
-        if (!c || c.trim() === '' || c === 'undefined') return;
-        const displayName = cityNormalizeMap[c] || c;
-        citySelect.innerHTML += `<option value="${c}">${displayName}</option>`;
-      });
-      producerSelect.innerHTML = '<option value="" disabled selected>Wybierz producenta</option>';
-      strainSelect.innerHTML = '<option value="" disabled selected>Wybierz odmianę</option>';
-      thcSelect.innerHTML = '<option value="" disabled selected>Wybierz % THC</option>';
-
-
-      citySelect.addEventListener('change', onCityChange);
-      producerSelect.addEventListener('change', onProducerChange);
-      strainSelect.addEventListener('change', onStrainChange);
-      thcSelect.addEventListener('change', applyFilters);
+    
+    if (height > maxHeight) {
+      width = (width * maxHeight) / height;
+      height = maxHeight;
     }
+    
+    gif.style.width = width + 'px';
+    gif.style.height = height + 'px';
+  };
+  img.src = 'updater1.gif';
+}
 
-    function onCityChange() {
-      const city = document.getElementById('city').value;
-      const filteredApteki = apteki.filter(a => a.miasto === city);
-      const producers = new Set();
-      filteredApteki.forEach(a => {
-        a.produkty.forEach(p => producers.add(p.producent));
-      });
-      const producerSelect = document.getElementById('producer');
-      producerSelect.innerHTML = '<option value="" disabled selected>Wybierz producenta</option>';
-      [...producers].sort().forEach(p => {
-        producerSelect.innerHTML += `<option value="${p}">${p}</option>`;
-      });
-      document.getElementById('strain').innerHTML = '<option value="" disabled selected>Wybierz odmianę</option>';
-      document.getElementById('thc').innerHTML = '<option value="" disabled selected>Wybierz % THC</option>';
-      showAllFromCity(city);
-    }
 
-    function showAllFromCity(city) {
-      const filteredApteki = apteki.filter(a => a.miasto === city);
-      const produktyZMiasta = [];
-      filteredApteki.forEach(apteka => {
-        apteka.produkty.forEach(p => {
-          produktyZMiasta.push({ apteka, produkt: p });
+window.addEventListener('load', () => {
+
+  initVisitCounter();
+  
+  if (shouldShowModal()) {
+    document.getElementById('startupModal').style.display = 'flex';
+    updateCountdown();
+    setGifSize();
+  } else {
+
+    document.getElementById('startupModal').style.display = 'none';
+    document.getElementById('mainContent').classList.add('visible');
+  }
+});
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  let apteki = [];
+  const citySelect = document.getElementById('city');
+  const strainSelect = document.getElementById('strain');
+  const producerSelect = document.getElementById('producer');
+  const thcSelect = document.getElementById('thc');
+  const results = document.getElementById('results');
+
+  const cityNormalizeMap = {
+    "Warszawie": "Warszawa",
+    "Krakowie": "Kraków",
+    "Lodzi": "Łódź",
+    "Wroclawiu": "Wrocław",
+    "Poznaniu": "Poznań",
+    "Gdansku": "Gdańsk",
+    "Gdyni": "Gdynia",
+    "Sopocie": "Sopot",
+    "Szczecinie": "Szczecin",
+    "Bydgoszczy": "Bydgoszcz",
+    "Lublinie": "Lublin",
+    "Bialymstoku": "Białystok",
+    "Katowicach": "Katowice",
+    "Gorzowie-wielkopolskim": "Gorzów Wielkopolski",
+    "Rzeszowie": "Rzeszów",
+    "Olsztynie": "Olsztyn",
+    "Zielonej-gorze": "Zielona Góra",
+    "Toruniu": "Toruń",
+    "Kielcach": "Kielce"
+  };
+
+  function populateCities() {
+    citySelect.innerHTML = '<option value="" disabled selected>Wybierz miasto</option>';
+    const cities = new Set();
+    apteki.forEach(a => cities.add(a.miasto));
+    
+    [...cities].sort().forEach(c => {
+      if (!c || c.trim() === '' || c === 'undefined') return;
+      const displayName = cityNormalizeMap[c] || c;
+      citySelect.innerHTML += `<option value="${c}">${displayName}</option>`;
+    });
+    
+    producerSelect.innerHTML = '<option value="" disabled selected>Wybierz producenta</option>';
+    strainSelect.innerHTML = '<option value="" disabled selected>Wybierz odmianę</option>';
+    thcSelect.innerHTML = '<option value="" disabled selected>Wybierz % THC</option>';
+
+    citySelect.addEventListener('change', () => {
+      onCityChange();
+      applyFilters();
+    });
+    producerSelect.addEventListener('change', () => {
+      onProducerChange();
+      applyFilters();
+    });
+    strainSelect.addEventListener('change', () => {
+      onStrainChange();
+      applyFilters();
+    });
+    thcSelect.addEventListener('change', applyFilters);
+  }
+
+  function onCityChange() {
+    const city = citySelect.value;
+    const filteredApteki = apteki.filter(a => a.miasto === city);
+
+    const producers = new Set();
+    filteredApteki.forEach(a => {
+      a.produkty.forEach(p => producers.add(p.producent));
+    });
+
+    producerSelect.innerHTML = '<option value="" disabled selected>Wybierz producenta</option>';
+    [...producers].sort().forEach(p => {
+      producerSelect.innerHTML += `<option value="${p}">${p}</option>`;
+    });
+
+    strainSelect.innerHTML = '<option value="" disabled selected>Wybierz odmianę</option>';
+    thcSelect.innerHTML = '<option value="" disabled selected>Wybierz % THC</option>';
+
+    showAllFromCity(city);
+  }
+
+  function showAllFromCity(city) {
+    const filteredApteki = apteki.filter(a => a.miasto === city);
+    const produktyZMiasta = [];
+
+    filteredApteki.forEach(apteka => {
+      apteka.produkty.forEach(p => {
+        produktyZMiasta.push({
+          apteka,
+          produkt: p
         });
       });
-      produktyZMiasta.sort((a, b) => a.produkt.cena - b.produkt.cena);
-      const resultsDiv = document.getElementById('results');
-      resultsDiv.innerHTML = '';
-      produktyZMiasta.forEach(({ apteka, produkt }) => {
-        resultsDiv.innerHTML += `
+    });
+
+    produktyZMiasta.sort((a, b) => a.produkt.cena - b.produkt.cena);
+
+    results.innerHTML = '';
+    produktyZMiasta.forEach(({ apteka, produkt }) => {
+      results.innerHTML += `
         <div class="apteka">
           <div class="apteka-header">${apteka.adres}<br>${apteka.dostępność}</div>
           <div class="product-item">
@@ -806,107 +866,170 @@
             </div>
             <a href="${apteka.link_rezerwacji}" target="_blank" class="rezerwuj-link">Rezerwuj</a>
           </div>
-        </div>`;
-      });
-      if (produktyZMiasta.length === 0) {
-        resultsDiv.innerHTML = '<p style="color: #f97316; text-align: center;">Brak wyników dla wybranego miasta.</p>';
-      }
-    }
+        </div>
+      `;
+    });
 
-    function onProducerChange() {
-      const city = document.getElementById('city').value;
-      const producer = document.getElementById('producer').value;
-      const filteredApteki = apteki.filter(a => a.miasto === city);
-      const strains = new Set();
-      filteredApteki.forEach(a => {
-        a.produkty.forEach(p => {
-          if (p.producent === producer) {
-            strains.add(p.odmiana);
-          }
-        });
-      });
-      const strainSelect = document.getElementById('strain');
-      strainSelect.innerHTML = '<option value="" disabled selected>Wybierz odmianę</option>';
-      [...strains].sort().forEach(s => {
-        strainSelect.innerHTML += `<option value="${s}">${s}</option>`;
-      });
-      document.getElementById('thc').innerHTML = '<option value="" disabled selected>Wybierz % THC</option>';
+    if (produktyZMiasta.length === 0) {
+      results.innerHTML = '<p style="color: #f97316; text-align: center;">Brak wyników dla wybranego miasta.</p>';
     }
+  }
 
-    function onStrainChange() {
-      const city = document.getElementById('city').value;
-      const producer = document.getElementById('producer').value;
-      const strain = document.getElementById('strain').value;
-      if (!city || !producer || !strain) {
-        document.getElementById('thc').innerHTML = '<option value="" disabled selected>Wybierz % THC</option>';
-        return;
-      }
-      const filteredApteki = apteki.filter(a => a.miasto === city);
-      const thcSet = new Set();
-      filteredApteki.forEach(a => {
-        a.produkty.forEach(p => {
-          if (p.producent === producer && p.odmiana === strain) {
-            thcSet.add(p.thc);
-          }
-        });
-      });
-      const thcSelect = document.getElementById('thc');
-      thcSelect.innerHTML = '<option value="" disabled selected>Wybierz % THC</option>';
-      [...thcSet].sort((a, b) => a - b).forEach(t => {
-        thcSelect.innerHTML += `<option value="${t}">${t}%</option>`;
-      });
-    }
+  function onProducerChange() {
+    const city = citySelect.value;
+    const producer = producerSelect.value;
 
-    function applyFilters() {
-      const city = document.getElementById('city').value;
-      const producer = document.getElementById('producer').value;
-      const strain = document.getElementById('strain').value;
-      const thc = parseFloat(document.getElementById('thc').value);
-      const filtered = [];
-      apteki.forEach(apteka => {
-        if (apteka.miasto !== city) return;
-        const produkty = apteka.produkty.filter(p => {
-          if (producer && p.producent !== producer) return false;
-          if (strain && p.odmiana !== strain) return false;
-          if (!isNaN(thc) && p.thc !== thc) return false;
-          return true;
-        });
-        if (produkty.length > 0) {
-          filtered.push({ apteka, produkty });
+    const filteredApteki = apteki.filter(a => a.miasto === city);
+    const strains = new Set();
+
+    filteredApteki.forEach(a => {
+      a.produkty.forEach(p => {
+        if (p.producent === producer) {
+          strains.add(p.odmiana);
         }
       });
-      filtered.sort((a, b) => {
-        const minA = Math.min(...a.produkty.map(p => p.cena));
-        const minB = Math.min(...b.produkty.map(p => p.cena));
-        return minA - minB;
-      });
-      const resultsDiv = document.getElementById('results');
-      resultsDiv.innerHTML = '';
-      filtered.forEach(({ apteka, produkty }) => {
-        produkty.sort((a, b) => a.cena - b.cena);
-        const produktyHTML = produkty.map(p => `
-          <div class="product-item">
-            <div>
-              <span class="strain-name">${p.odmiana}</span> 
-              <span class="producer-name">(${p.producent})</span><br>
-              <span class="thc-content">${p.thc}% THC</span><br>
-              <span class="date-text">${p.data}</span><br>
-              <div class="price">${p.cena.toFixed(2)} zł/g</div>
-            </div>
-            <a href="${apteka.link_rezerwacji}" target="_blank" class="rezerwuj-link">Rezerwuj</a>
-          </div>
-        `).join('');
-        document.getElementById('results').innerHTML += `
-          <div class="apteka">
-            <div class="apteka-header">${apteka.adres}<br>${apteka.dostępność}</div>
-            ${produktyHTML}
-          </div>`;
-      });
-      if (resultsDiv.innerHTML === '') {
-        resultsDiv.innerHTML = '<p style="color: #f97316; text-align: center;">Brak wyników dla wybranych filtrów.</p>';
-      }
+    });
+
+    strainSelect.innerHTML = '<option value="" disabled selected>Wybierz odmianę</option>';
+    [...strains].sort().forEach(s => {
+      strainSelect.innerHTML += `<option value="${s}">${s}</option>`;
+    });
+
+    thcSelect.innerHTML = '<option value="" disabled selected>Wybierz % THC</option>';
+  }
+
+  function onStrainChange() {
+    const city = citySelect.value;
+    const producer = producerSelect.value;
+    const strain = strainSelect.value;
+
+    if (!city || !producer || !strain) {
+      thcSelect.innerHTML = '<option value="" disabled selected>Wybierz % THC</option>';
+      return;
     }
-  });
+
+    const filteredApteki = apteki.filter(a => a.miasto === city);
+    const thcSet = new Set();
+
+    filteredApteki.forEach(a => {
+      a.produkty.forEach(p => {
+        if (p.producent === producer && p.odmiana === strain) {
+          thcSet.add(p.thc);
+        }
+      });
+    });
+
+    thcSelect.innerHTML = '<option value="" disabled selected>Wybierz % THC</option>';
+    [...thcSet].sort((a, b) => a - b).forEach(t => {
+      thcSelect.innerHTML += `<option value="${t}">${t}%</option>`;
+    });
+  }
+
+  function applyFilters() {
+    const city = citySelect.value;
+    const producer = producerSelect.value;
+    const strain = strainSelect.value;
+    const thc = parseFloat(thcSelect.value);
+
+    let pasujące = [];
+
+    apteki.forEach(apteka => {
+      if (apteka.miasto !== city) return;
+
+      const produkty = apteka.produkty.filter(p => {
+        if (producer && p.producent !== producer) return false;
+        if (strain && p.odmiana !== strain) return false;
+        if (!isNaN(thc) && p.thc !== thc) return false;
+        return true;
+      });
+
+      if (produkty.length > 0) {
+        pasujące.push({ apteka, produkty });
+      }
+    });
+
+
+    pasujące.sort((a, b) => {
+      const minPriceA = Math.min(...a.produkty.map(p => p.cena));
+      const minPriceB = Math.min(...b.produkty.map(p => p.cena));
+      return minPriceA - minPriceB;
+    });
+
+    results.innerHTML = '';
+    pasujące.forEach(({ apteka, produkty }) => {
+
+      produkty.sort((a, b) => a.cena - b.cena);
+      
+      const produktyHTML = produkty.map(p =>
+        `<div class="product-item">
+          <div>
+            <span class="strain-name">${p.odmiana}</span> 
+            <span class="producer-name">(${p.producent})</span><br>
+            <span class="thc-content">${p.thc}% THC</span><br>
+            <span class="date-text">${p.data}</span><br>
+            <div class="price">${p.cena.toFixed(2)} zł/g</div>
+          </div>
+          <a href="${apteka.link_rezerwacji}" target="_blank" class="rezerwuj-link">Rezerwuj</a>
+        </div>`
+      ).join('');
+
+      results.innerHTML += `
+        <div class="apteka">
+          <div class="apteka-header">${apteka.adres}<br>${apteka.dostępność}</div>
+          ${produktyHTML}
+        </div>
+      `;
+    });
+
+    if (results.innerHTML === '') {
+      results.innerHTML = '<p style="color: #f97316; text-align: center;">Brak wyników dla wybranych filtrów.</p>';
+    }
+  }
+
+
+  fetch('./apteki_interaktywne.json')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      if (data && data.length > 0) {
+
+        const lastItem = data[data.length - 1];
+        if (lastItem && lastItem.update) {
+          document.getElementById('update-date').textContent = lastItem.update;
+        }
+        apteki = data;
+        populateCities();
+      } else {
+        throw new Error('Puste dane JSON');
+      }
+    })
+    .catch(err => {
+      console.error('Błąd ładowania danych:', err);
+      results.innerHTML = '<p style="color: #ef4444; text-align: center;">Błąd ładowania danych. Sprawdź czy plik apteki_interaktywne.json istnieje w tym samym folderze.</p>';
+      
+
+      fetch('apteki_interaktywne.json')
+        .then(response => response.json())
+        .then(data => {
+          if (data && data.length > 0) {
+            const lastItem = data[data.length - 1];
+            if (lastItem && lastItem.update) {
+              document.getElementById('update-date').textContent = lastItem.update;
+            }
+            apteki = data;
+            populateCities();
+            results.innerHTML = '';
+          }
+        })
+        .catch(err2 => {
+          console.error('Drugi błąd ładowania danych:', err2);
+        });
+    });
+});
 </script>
 
 </body>

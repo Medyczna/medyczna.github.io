@@ -665,10 +665,14 @@ function setModalShown() {
 
 
 let countdown = 5;
-const countdownElement = document.getElementById('countdown');
-const closeBtn = document.getElementById('closeBtn');
+let countdownElement;
+let closeBtn;
 
 function updateCountdown() {
+  if (countdownElement === null || closeBtn === null) {
+    return; // zabezpieczenie, jeśli elementy nie istnieją
+  }
+
   if (countdown > 0) {
     countdownElement.textContent = `Możesz zamknąć za ${countdown} sekund...`;
     countdown--;
@@ -677,21 +681,6 @@ function updateCountdown() {
     countdownElement.textContent = 'Kliknij X aby zamknąć';
     closeBtn.style.opacity = '1';
   }
-}
-
-function closeModal() {
-  const modal = document.getElementById('startupModal');
-  const mainContent = document.getElementById('mainContent');
-  
-  modal.style.opacity = '0';
-  modal.style.transform = 'scale(0.8)';
-  
-  setTimeout(() => {
-    modal.style.display = 'none';
-    mainContent.classList.add('visible');
-  }, 300);
-  
-  setModalShown();
 }
 
 
@@ -731,17 +720,18 @@ function setGifSize() {
   img.src = 'updater1.gif';
 }
 
-
 window.addEventListener('load', () => {
-
   initVisitCounter();
-  
+
   if (shouldShowModal()) {
     document.getElementById('startupModal').style.display = 'flex';
+
+    countdownElement = document.getElementById('countdown');
+    closeBtn = document.getElementById('closeBtn');
+
     updateCountdown();
     setGifSize();
   } else {
-
     document.getElementById('startupModal').style.display = 'none';
     document.getElementById('mainContent').classList.add('visible');
   }
